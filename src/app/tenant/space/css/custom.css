@@ -621,7 +621,7 @@ address{margin:0;}
     display: block;
 	font-size: 17px;
 	color: black;
-    font-family: 'MonsterattRegular_2';
+    font-family: 'MontserratRegular_2';
     font-weight: 400;
   }
   .btn-purple {
@@ -631,7 +631,7 @@ address{margin:0;}
 	color:#fff !important;
 	border-radius: 5px;
 	height: 40px;
-	font-family: 'MonsterattRegular_2';
+	font-family: 'MontserratRegular_2';
 	font-size: 15px;
 	width: fit-content;
 	/* text-transform: uppercase; */
@@ -811,7 +811,7 @@ address{margin:0;}
 #ab{
 	border-radius:4px !important;
 	text-align: center;
-	font-style: 'MonsterattRegular_2' !important;
+	font-style: 'MontserratRegular_2' !important;
 	font-weight: 400 !important;
 	z-index: 11;
 	font-size: 1.25em !important;
@@ -1070,7 +1070,7 @@ a:hover, a:active {
 .ft-1 a {
     text-decoration: none;
     font-size:1.3em;
-	font-family: 'MonsterattRegular_2';
+	font-family: 'MontserratRegular_2';
     color:black!important;
     cursor: pointer;
 }
