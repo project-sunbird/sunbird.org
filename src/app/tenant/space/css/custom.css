@@ -40,6 +40,12 @@ body{
 	font-style: normal !important;
 	font-weight: 500 !important;
 }
+@font-face {
+    font-family: 'MontserratRegular_2';
+    src: url('../fonts/montserrat/Montserrat-Regular.ttf');
+    font-style: normal !important;
+    font-weight: 400;
+  }
 .margint5{
 	margin-top:5px;
 }
