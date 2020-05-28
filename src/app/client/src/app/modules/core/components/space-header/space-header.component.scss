@@ -207,7 +207,9 @@ background: #007b5e;
     color: black
   }
 }
-
+.profiledropdown {
+  width: 35%;
+}
 ::ng-deep {
   .ui.fluid.action.input.primary-search-input {
     height: 39px;
@@ -228,6 +230,12 @@ background: #007b5e;
 
 .profile-avtar:hover{
   opacity:1;
+}
+
+@media screen and (max-width:1034px) {
+  .profiledropdown {
+    width: 60% !important;
+  }
 }
 
 @media screen and (max-width:374px ) and (min-width: 312px) {
@@ -330,7 +338,7 @@ background: #007b5e;
 }
 @media (min-width: 992px) {
 .col-lg-9 {
-    max-width: 79% !important;
+    max-width: 100% !important;
 }
 }
 @media only screen and (min-width: 766px) and (max-width: 1024px) {
