@@ -45,8 +45,8 @@
                <p class="creator mb-0">Created By : {{content?.creators}}</p>
                <!-- <p class="creator mb-0">Country : {{content?.region}}</p> -->
                <p *ngIf="content?.year" class="creator mb-0"> Created Year: {{content?.year}}</p>
-               <p class="creator contentlink mb-0" id="link" *ngIf="content?.mimeType === 'text/x-url' &&content?.link">Link : {{content?.link}}</p>
-              <div data-toggle="tooltip" data-placement="top" title="{{content?.description}}">  <span  class="desc1">Description: </span>   <span class="card-text1">{{content?.description | titlecase | slice:0:60}}</span>   <span *ngIf="content?.description && content.description?.length > 60">...</span></div>
+               <p class="creator contentlink mb-0" id="link" *ngIf="content?.mimeType === 'text/x-url' &&content?.link">Link : <span class="text-purple">{{content?.link}}</span></p>
+              <div data-toggle="tooltip" data-placement="top" title="{{content?.description}}">  <span  class="desc1">Description: </span>   <span class="card-text1">{{content?.description | titlecase | slice:0:50}}</span>   <span *ngIf="content?.description && content.description?.length > 50">...</span></div>
               
               <div class="d-flex justify-content-center mt-30">
                 <button *ngIf="(content?.status==='Draft' || content?.status=== 'DRAFT' || content?.status=== 'LIVE' || content?.status=== 'Live') && copied[content['versionKey']] && route.isActive('myassets')" type="button" class="btn text-secondary" id="style"

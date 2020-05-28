@@ -54,42 +54,42 @@
       <p class="card-text" *ngIf="assetDetail?.description">Description : {{assetDetail?.description | titlecase}}</p>
       <p class="card-text" *ngIf="assetDetail?.mimeType === 'text/x-url' &&  assetDetail?.link.slice(0,4) === 'http' ">
         Link:
-        <a href="{{assetDetail?.link}}" target="_blank">{{assetDetail?.link}} </a>
+        <a class="text-purple" href="{{assetDetail?.link}}" target="_blank">{{assetDetail?.link}} </a>
       </p>
       <p class="card-text" *ngIf="assetDetail?.mimeType === 'text/x-url' && assetDetail?.link.slice(0,4) !== 'http' ">
         Link:
-        <a href="http://{{assetDetail?.link}}" target="_blank">{{assetDetail?.link}} </a>
+        <a class="text-purple" href="http://{{assetDetail?.link}}" target="_blank">{{assetDetail?.link}} </a>
       </p>
       <p class="card-text" *ngIf=" assetDetail?.mimeType !=='text/x-url'">Submitted By : {{ assetDetail?.organisation[assetDetail.organisation.length - 1] }}</p>
       <p class="card-text" *ngIf="assetDetail?.lastSubmittedOn && assetDetail?.mimeType !=='text/x-url'">Submitted Date :
         {{assetDetail?.lastSubmittedOn | dateFormat}}</p>
       <div *ngIf="assetDetail?.artifactUrl && assetDetail?.mimeType === 'application/pdf'">
         <p>
-          File : <span (click)="navigateToView()" class="pdfStyle">{{contentuploaded}}</span>
+          File : <span (click)="navigateToView()" class="pdfStyle text-purple">{{contentuploaded}}</span>
         </p>
 
       </div>
       <div *ngIf="assetDetail?.artifactUrl && assetDetail?.mimeType === 'application/epub'">
         <p>
-            File : <span (click)="navigateToView()" class="pdfStyle">{{contentuploaded}}</span>
+            File : <span (click)="navigateToView()" class="pdfStyle text-purple">{{contentuploaded}}</span>
             
         </p>
     </div>
 <div *ngIf="assetDetail?.artifactUrl && assetDetail?.mimeType === 'video/x-youtube'">
         <p>
-            Video : <span (click)="navigateToView()" class="pdfStyle">{{assetDetail?.artifactUrl}}</span>
+            Video : <span (click)="navigateToView()" class="pdfStyle text-purple">{{assetDetail?.artifactUrl}}</span>
             
         </p>
     </div> 
     <div *ngIf="assetDetail?.artifactUrl && assetDetail?.mimeType === 'video/mp4'">
         <p>
-            Video : <span (click)="navigateToView()" class="pdfStyle">{{contentuploaded}}</span>
+            Video : <span (click)="navigateToView()" class="pdfStyle text-purple">{{contentuploaded}}</span>
             
         </p>
     </div> 
     <div *ngIf="assetDetail?.artifactUrl && assetDetail?.mimeType === 'video/webm'">
         <p>
-            Video : <span (click)="navigateToplay()" class="pdfStyle">{{contentuploaded}}</span>
+            Video : <span (click)="navigateToplay()" class="pdfStyle text-purple">{{contentuploaded}}</span>
             
         </p>
     </div>

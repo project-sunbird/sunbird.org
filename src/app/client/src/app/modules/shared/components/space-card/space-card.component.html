@@ -46,7 +46,7 @@
         <span *ngIf="keywordsString.length > 50">...</span>
       </span>
       <span class="creator contentlink" *ngIf="data?.mimeType === 'text/x-url' && data?.link" id="link">Link :
-        {{data?.link}}</span>
+        <span class="text-purple">{{data?.link}}</span>  </span>
       <!-- <span class="creator" *ngIf="data?.region ">Country : {{data?.region | titlecase}}</span> -->
       <span class="creator" *ngIf="data?.year">Created Year : {{data?.year}}</span>
     </div>

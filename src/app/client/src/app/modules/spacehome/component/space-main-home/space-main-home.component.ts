@@ -18,20 +18,24 @@ export class SpaceMainHomeComponent implements OnInit, OnDestroy {
   public contents = [
     {
       role: 'CONTENT_CREATOR',
-      data: [ 'As a Content Creator, you can use the SPace to accomplish the following:',
+      data: [ 'As a Content Creator, you can do the following:',
       // tslint:disable-next-line:max-line-length
-      ' - Search and Discover Assets: You can discover assets - Knowledge, Process, Software, Hardware, Data - that you would like to leverage for your Mission. Go to Shared Assets.',
+      ' - Search and discover assets',
        // tslint:disable-next-line:max-line-length
-      ' - Add an Asset: You can add information about an asset that you like to share with others in the ecosystem. You can also edit, delete and publish your assets. Go to My Assets.'
+      ' - Add a new asset',
+
+      '- Edit / delete an existing asset'
      ]
     },
     {
      role: 'CONTENT_REVIEWER',
      data: [
-       'As a Reviewer , you can use the SPace to accomplish the following:',
+       'As a Content Reviewer, you can do the following:',
         // tslint:disable-next-line:max-line-length
-       '- Search, Discover and Review Assets: You can discover assets - Knowledge, Process, Software, Hardware, Data - that you would like to Badge. Go to Shared Assets.',
-            ]
+        '- Search and discover assets',
+
+        '- Review and publish/reject an asset'
+             ]
    },
    {
      role: 'ORG_ADMIN',

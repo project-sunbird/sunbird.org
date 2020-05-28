@@ -621,7 +621,7 @@ address{margin:0;}
     display: block;
 	font-size: 17px;
 	color: black;
-    font-family: 'Montserrat';
+    font-family: 'MonsterattRegular_2';
     font-weight: 400;
   }
   .btn-purple {
@@ -631,7 +631,7 @@ address{margin:0;}
 	color:#fff !important;
 	border-radius: 5px;
 	height: 40px;
-	font-family: 'Montserrat';
+	font-family: 'MonsterattRegular_2';
 	font-size: 15px;
 	width: fit-content;
 	/* text-transform: uppercase; */
@@ -811,7 +811,7 @@ address{margin:0;}
 #ab{
 	border-radius:4px !important;
 	text-align: center;
-	font-style: 'Montserrat' !important;
+	font-style: 'MonsterattRegular_2' !important;
 	font-weight: 400 !important;
 	z-index: 11;
 	font-size: 1.25em !important;
@@ -1070,12 +1070,12 @@ a:hover, a:active {
 .ft-1 a {
     text-decoration: none;
     font-size:1.3em;
-	font-family: 'Montserrat Light';
-    color: #707070 !important;
+	font-family: 'MonsterattRegular_2';
+    color:black!important;
     cursor: pointer;
 }
 .footer__right__content {
-    color: #bababa;
+    color: black;
     font-weight: 400;
     margin-bottom: 15px;
     font-size: 13px;
@@ -1177,4 +1177,11 @@ a:hover {
 .col-lg-6 {
     width: 43%;
 }
+}
+.computer.only {
+    width: max-content;
+}
+.text-purple{
+	text-decoration: none;
+color:#865BA0 !important;
 }
