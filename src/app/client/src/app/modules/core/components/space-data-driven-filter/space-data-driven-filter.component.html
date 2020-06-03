@@ -37,7 +37,7 @@
                     <div class="ui grid">
                         <div class="twelve wide tablet nine wide computer column mobile-p-0">
                             <div class="ui grid">
-                        <div *ngFor="let field of filtersDetails" class="six wide mobile four wide tablet four wide computer column">
+                        <div *ngFor="let field of filtersDetails" class="twelve wide mobile four wide tablet four wide computer column">
                           <div *ngIf="(field.inputType==='select' || field.inputType === 'multi-select')" class="field large">
                             <label>{{field.label}}</label>
                             <sui-multi-select (ngModelChange)="setFilterInteractData()" id={{field.code}} name={{field.code}}
@@ -87,7 +87,7 @@
                           [telemetryInteractEdata]="submitIntractEdata">{{resourceService.frmelmnts?.btn?.apply}}</a>
                         <a class="searchfilterbutton ui  tiny basic button ml-10" (click)="resetFilters()">{{resourceService.frmelmnts?.btn?.reset}}</a>
                       </div> -->
-                <div class="d-flex justify-content-center pt-30">
+                <div class="d-flex justify-content-center pt-30 mobile-res">
                     <div class="tablet four wide computer text-align-right top aligned column filter-button">
                         <a class="searchfilterbutton ui tiny  button" (click)="applyFilters()" appTelemetryInteract
                           [telemetryInteractEdata]="submitIntractEdata">{{resourceService.frmelmnts?.btn?.apply}}</a>
