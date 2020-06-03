@@ -16,11 +16,22 @@ export class SpaceCardComponent  {
   @Input() customClass: string;
   @Output() clickEvent = new EventEmitter<any>();
   url: string;
+
+  keywordsString='';
   constructor(public resourceService: ResourceService, public router: Router) {
     this.resourceService = resourceService;
   }
 
 
+  ngOnInit() {
+    if(this.data['keywords'] && this.data['keywords'].length > 0) {
+
+      this.keywordsString = '';
+      this.data['keywords'].forEach(element => {
+    this.keywordsString = this.keywordsString + element + ',';
+    });
+  }
+  }
   public onAction(data, action, event, link) {
  this.url = link;
    // console.log('content in space cards = ', data, action, event, this.url.slice(0, 5));

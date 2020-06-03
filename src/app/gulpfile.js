@@ -9,11 +9,10 @@ const exec = require('child_process').exec
 const brotli = require('gulp-brotli');
 
 // To download editors
-const contentEditor = process.env.sunbird_content_editor_artifact_url;
-const collectionEditor = process.env.sunbird_collection_editor_artifact_url;
-const genericEditor = process.env.sunbird_generic_editor_artifact_url;
+const contentEditor = 'https://sunbirdpublic.blob.core.windows.net/sunbird-public-dev/artefacts/editor/content-editor-iframe-2.0.0.zip'
+const collectionEditor = 'https://sunbirdpublic.blob.core.windows.net/sunbird-public-dev/artefacts/editor/collection-editor-iframe-2.0.0.zip'
+const genericEditor = 'https://sunbirdpublic.blob.core.windows.net/sunbird-public-dev/artefacts/editor/generic-editor-iframe-2.0.0.zip'
 const editorsDestPath = 'client/src/thirdparty/editors/'
-
 
 gulp.task('clean:editors', () => {
     return gulp.src('./' + editorsDestPath, { read: false })

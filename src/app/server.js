@@ -68,12 +68,6 @@ app.all('/:slug/logoff', endSession, (req, res, next) => {
   res.cookie('connect.sid', '', { expires: new Date() }); 
   res.redirect(envHelper.PORTAL_AUTH_SERVER_URL+'/realms/'+envHelper.PORTAL_REALM+'/protocol/openid-connect/logout?redirect_uri='+envHelper.LOGOUT_REDIRECT_URL+req.params.slug);
 })
-/*
-app.all('/logoffsbwb', endSession, (req, res, next) => {
-  res.cookie('connect.sid', '', { expires: new Date() }); 
-  res.redirect(envHelper.PORTAL_AUTH_SERVER_URL+'/realms/'+envHelper.PORTAL_REALM+'/protocol/openid-connect/logout?redirect_uri='+envHelper.LOGOUT_REDIRECT_URL+'sbwb');
-})
-*/
 app.get('/health', healthService.createAndValidateRequestBody, healthService.checkHealth) // health check api http%3A%2F%2Flocalhost%3A3000%2Fspace%3F
 
 app.get('/service/health', healthService.createAndValidateRequestBody, healthService.checkSunbirdPortalHealth)

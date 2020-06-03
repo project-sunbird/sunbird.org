@@ -1,11 +1,10 @@
-
 <div class="container mt-2" [appTelemetryImpression]="telemetryImpression">
     <h4>Add a New Asset</h4>
     <hr>
     <form class="ui form">
         <div class="content">
             <div *ngIf="formFieldProperties && categoryMasterList">
-                <app-space-default-template #formData [formFieldProperties]="formFieldProperties"
+                <app-space-default-template #formData [uploadContent]="uploadContent" [formFieldProperties]="formFieldProperties"
                     [categoryMasterList]="categoryMasterList">
                 </app-space-default-template>
             </div>

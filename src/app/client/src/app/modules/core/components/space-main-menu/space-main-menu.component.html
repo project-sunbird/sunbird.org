@@ -1,4 +1,4 @@
-<div class="ui text menu m-0 flex-jc-center d-flex computer only" *ngIf="userService.loggedIn">
+<div style="border: none;box-shadow: none;" class="ui text2 menu m-0 flex-jc-center d-flex computer only" *ngIf="userService.loggedIn">
     <!-- <a class="item" appTelemetryInteract [telemetryInteractEdata]="homeMenuIntractEdata" [class.active]="router.isActive('/search/All') || router.isActive('/home')" routerLink="/home">
       {{resourceService?.frmelmnts?.tab?.home}}
     </a> -->
@@ -44,7 +44,7 @@
                                       <button [disabled]="loading" id="close" class="btn btn-purple float-lg-right mr-10 text-center py-2" appTelemetryInteract
                                       [telemetryInteractEdata]="feedbackSubmitInteractEdata">	SEND </button>										
                                   </div>
-                                <input type="submit" value="CLOSE" id="close" (click)="d('Cross click')"  class="btn btn-lightgrey text-center mr-10 float-lg-right py-2" appTelemetryInteract [telemetryInteractEdata]="feedbackCloseInteractEdata">
+                                <input type="submit" value="CLOSE" id="close" (click)="d('Cross click')"  class="btn closebtn btn-lightgrey text-center mr-10 float-lg-right py-2" appTelemetryInteract [telemetryInteractEdata]="feedbackCloseInteractEdata">
       
                         </div>
           

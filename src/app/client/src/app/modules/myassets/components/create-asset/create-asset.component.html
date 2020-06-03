@@ -4,7 +4,7 @@
     <form class="ui form">
         <div class="content">
             <div *ngIf="formFieldProperties && categoryMasterList">
-                <app-update-resoure-form #formData [formFieldProperties]="formFieldProperties"
+                <app-update-resoure-form #formData [enableLink]="enableLink" [formFieldProperties]="formFieldProperties"
                     [categoryMasterList]="categoryMasterList">
                 </app-update-resoure-form>
             </div>

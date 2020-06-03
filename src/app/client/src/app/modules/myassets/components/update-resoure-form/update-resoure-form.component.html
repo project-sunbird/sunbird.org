@@ -30,10 +30,10 @@
       </div>
     </div>
     
-    <div *ngIf="field.inputType==='text' && field.code==='creators'" class="required field"
-      [ngClass]="{ 'disabled':!field.editable}">
+    <div *ngIf="field.inputType==='text' && field.code==='creators'" class="field"
+      [ngClass]="{ 'disabled':!field.editable,'required' : !enableLink}">
 
-      <div class="field required">
+      <div [ngClass]="{'required': !enableLink}" class="field">
         <label>
           {{field.name}}
         </label>
@@ -44,14 +44,12 @@
     </div>
     <!-- <div *ngIf="field.inputType==='text' && field.code==='region'" class="required field"
       [ngClass]="{ 'disabled':!field.editable}">
-
       <div class="field">
         <label>
           {{field.name}}
         </label>
         <input name={{field.code}} type={{field.inputType}} [(ngModel)]="formInputData[field.code]" id="style"
           placeholder={{field.placeholder}}>
-
       </div>
     </div> -->
     <div *ngIf="field.code!='year' && field.code==='region'" class="field required"
@@ -77,7 +75,7 @@
             <option *ngFor="let option of countryList" [value]="option">{{option}}</option></select> -->
       </div>
     </div>
-    <div *ngIf="field.inputType==='number'" class="required field" [ngClass]="{ 'disabled':!field.editable}">
+    <div *ngIf="field.inputType==='number'" class="field" [ngClass]="{ 'disabled':!field.editable , 'required' : !enableLink}">
       <label>
         {{field.name}}
       </label>
@@ -113,10 +111,10 @@
     </div>
 
 
-    <div *ngIf="field.inputType==='select' && field.code!='year' && field.code!='region'" class="field required"
-      [ngClass]="{ 'disabled':!field.editable}">
+    <div *ngIf="field.inputType==='select' && field.code!='year' && field.code!='region'" class="field"
+      [ngClass]="{ 'disabled':!field.editable, 'required': !enableLink}">
       <!-- <label>{{field.name}}</label> -->
-      <div class="required field">
+      <div class="field" [ngClass]="{'required':!enableLink}">
         <label>
           {{field.name}}
         </label>
@@ -126,9 +124,9 @@
         </sui-select>
       </div>
     </div>
-    <div *ngIf="field.inputType==='multiSelect'" class="field required" [ngClass]="{ 'disabled':!field.editable}">
+    <div *ngIf="field.inputType==='multiSelect'" class="field " [ngClass]="{ 'disabled':!field.editable, 'required': !enableLink}">
         <label>{{field.name}}</label>
-        <div class="required field">
+        <div class=" field">
           <sui-multi-select id={{field.code}} name={{field.code}} class="selection"
             [(ngModel)]="formInputData[field.code]"
             (ngModelChange)="updateForm({index:i, field:field, value:formInputData[field.code]})" #multiSelect>
@@ -169,7 +167,7 @@
       </form>
     </div>
     <div class="licensedropdowns">
-        <div *ngIf="i === 5" class="field type1 required">
+        <div *ngIf="i === 5" class="field type1" [ngClass]= "{'required': !enableLink}">
           
             <label>Asset Format</label>
             <div class="field">
@@ -178,7 +176,7 @@
                   </sui-select>
                 </div>
         </div>
-        <div *ngIf="i === 5" class="field type2 required">
+        <div *ngIf="i === 5" class="field type2" [ngClass]= "{'required': !enableLink}">
                 <label>License Type</label>
                 <button style="background-color: transparent;border:transparent" (click)='showall()'><i class="fas fa-info-circle"></i></button>
                 <div class="field">

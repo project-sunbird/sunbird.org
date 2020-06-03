@@ -55,7 +55,9 @@ export class ResourceComponent implements OnInit, OnDestroy, AfterViewInit {
   public facetsList: any;
   public paginationDetails: IPagination;
   public contentList: Array<ICard> = [];
+  sectionObj: { slug: any, sectionUrl: string, pageNumber: number, queryParams: any};
 
+  sectionData = false;
   @HostListener('window:scroll', []) onScroll(): void {
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight * 2 / 3)
       && this.pageSections.length < this.carouselMasterData.length) {
@@ -166,7 +168,6 @@ export class ResourceComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       /*
       adding channel code in the filters to show relevant courses only
-
       change made by RISHABH KALRA, NIIT LTD on 12-06-2019
       */
       option.filters['channel'] = [this.hashTagId];
@@ -318,8 +319,10 @@ export class ResourceComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         if (this.carouselMasterData.length >= 2) {
           this.pageSections = [this.carouselMasterData[0], this.carouselMasterData[1]];
+          this.spaceViewAll(this.pageSections[0]);
         } else if (this.carouselMasterData.length >= 1) {
           this.pageSections = [this.carouselMasterData[0]];
+          this.spaceViewAll(this.pageSections[0]);
         }
         this.cdr.detectChanges();
       }, err => {
@@ -376,6 +379,29 @@ export class ResourceComponent implements OnInit, OnDestroy, AfterViewInit {
     const queryParams = { ...searchQuery.request.filters, ...this.queryParams }; // , ...this.queryParams
     const sectionUrl = 'resources/view-all/' + event.name.replace(/\s/g, '-');
     this.router.navigate([sectionUrl, 1], { queryParams: queryParams });
+  }
+  public spaceViewAll(event) {
+    if(event) {
+      const searchQuery = JSON.parse(event.searchQuery);
+      const softConstraintsFilter = {
+        board: [this.dataDrivenFilters.board],
+        channel: this.hashTagId,
+      };
+      searchQuery.request.filters.softConstraintsFilter = JSON.stringify(softConstraintsFilter);
+      searchQuery.request.filters.defaultSortBy = JSON.stringify(searchQuery.request.sort_by);
+      searchQuery.request.filters.exists = searchQuery.request.exists;
+      this.cacheService.set('viewAllQuery', searchQuery.request.filters);
+      this.cacheService.set('pageSection', event, { maxAge: this.browserCacheTtlService.browserCacheTtl });
+      const queryParams = { ...searchQuery.request.filters, ...this.queryParams }; // , ...this.queryParams
+      const sectionUrl = 'resources/view-all/' + event.name.replace(/\s/g, '-');
+      this.sectionObj = {
+        slug: this.slug,
+        sectionUrl : sectionUrl,
+        pageNumber : 1,
+        queryParams : queryParams
+      };
+      this.sectionData = true;
+    }
   }
   ngOnDestroy() {
     this.unsubscribe$.next();

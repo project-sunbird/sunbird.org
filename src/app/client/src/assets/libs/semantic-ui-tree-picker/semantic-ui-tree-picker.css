@@ -10,7 +10,9 @@
     float: right;
     margin-top: -3px;
 }
-
+.mauvebackground {
+    background-color: #865BA0 !important;
+}
 .ui.tree-picker.modal .header .menu .item.highlighted {
     color: #2b9289;
 }

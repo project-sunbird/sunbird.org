@@ -38,7 +38,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadless','FirefoxAutoAllowGUM'],
     customLaunchers: {
       ChromeHeadless: {
         base: 'Chrome',
@@ -49,7 +49,13 @@ module.exports = function (config) {
           // Without a remote debugging port, Google Chrome exits immediately.
           '--remote-debugging-port=9222'
         ]
-      }
+      },
+      FirefoxAutoAllowGUM: {
+        base: 'Firefox',
+        prefs: {
+            'media.navigator.permission.disabled': true
+        }
+    }
     },
     singleRun: false
   })

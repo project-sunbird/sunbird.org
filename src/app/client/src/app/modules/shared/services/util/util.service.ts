@@ -6,6 +6,9 @@ import { Subject, Observable } from 'rxjs';
 export class UtilService {
   static singletonInstance: UtilService;
   public showAppPopUp = false;
+  private searchQuery = new Subject<any>();
+  public searchQuery$ = this.searchQuery.asObservable();
+
   constructor() {
     if (!UtilService.singletonInstance) {
       UtilService.singletonInstance = this;
@@ -27,8 +30,9 @@ export class UtilService {
     const content: any = {
       name: data.name || data.courseName,
       image: data.appIcon || data.courseLogoUrl,
-      addedToLibrary: data.addedToLibrary || false,
+      downloadStatus: data.downloadStatus,
       description: data.description,
+      keywords: data.keywords || [],
       rating: data.me_averageRating || '0',
       subject: data.subject,
       medium: data.medium,
@@ -54,7 +58,11 @@ export class UtilService {
       version: data.version,
       completionPercentage: data.completionPercentage || 0 ,
       sector: data.sector,
-      organisation: data.organisation,
+      mimeTypesCount: data.mimeTypesCount || 0,
+      cardImg: data.appIcon || data.courseLogoUrl || 'assets/images/book.png',
+      resourceType: data.resourceType,
+      badgeAssertions: data.badgeAssertions,
+      organisation: data.organisation
     };
 
     // this customization is done for enrolled courses
@@ -178,5 +186,27 @@ export class UtilService {
       }
     });
     return formInputData;
+  }
+  getPlayerDownloadStatus(status, content, currentRoute) {
+    if (currentRoute === 'browse') {
+      if (status === 'DOWNLOAD') {
+        return (!content['downloadStatus'] || content['downloadStatus'] === 'FAILED');
+      }
+      return (content['downloadStatus'] === status);
+    }
+    return false;
+  }
+  getPlayerUpdateStatus(status, content, currentRoute, isUpdated) {
+    if (currentRoute === 'library' && isUpdated) {
+      if (status === 'UPDATE') {
+        return (!content['downloadStatus'] || content['downloadStatus'] === 'FAILED');
+      }
+      return (content['downloadStatus'] === status);
+    }
+    return false;
+  }
+
+  clearSearchQuery() {
+      this.searchQuery.next();
   }
 }

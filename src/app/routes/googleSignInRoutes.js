@@ -3,6 +3,7 @@ const { googleOauth, createSession, fetchUserByEmailId, createUserWithMailId } =
 const telemetryHelper = require('../helpers/telemetryHelper')
 const googleDid = '2c010e13a76145d864e459f75a176171';
 const logger = require('sb_logger_util_v2')
+const sessionstorage = require('sessionstorage');
 module.exports = (app) => {
 
   app.get('/google/auth', (req, res) => {
@@ -60,6 +61,10 @@ module.exports = (app) => {
       logger.error({msg:'google sign in failed', error, additionalInfo: {errType, googleProfile, sunbirdProfile, newUserDetails, redirectUrl}})
       logErrorEvent(req, errType, error);
     } finally {
+      const channelName = sessionstorage.getItem('tenant');
+      if(channelName === 'space'){
+        res.redirect(redirectUrl || '/myassets');
+      }
       res.redirect(redirectUrl || '/resources');
     }
   });

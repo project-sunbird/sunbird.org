@@ -49,7 +49,7 @@ export class FormService {
           type: formInputParams.formType,
           action: formInputParams.formAction,
           subType: this.configService.appConfig.formApiTypes[formInputParams.contentType],
-          rootOrgId: hashTagId ? hashTagId : this.userService.hashTagId
+          rootOrgId: formInputParams.rootOrgId ? formInputParams.rootOrgId : ( hashTagId ? hashTagId : this.userService.hashTagId )
         }
       }
     };

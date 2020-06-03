@@ -28,6 +28,7 @@ export class FrameworkPickerComponent implements OnInit, OnDestroy {
 
   @Output() topicChanges = new EventEmitter();
 
+  @Input() tenant = 'space';
   public placeHolder: string;
 
   public selectedNodes: any;
@@ -86,6 +87,7 @@ $('.framework').treePicker({
       data: data,
       name: this.name,
       count: this.count,
+      tenant: this.tenant,
       noDataMessage: 'No Topics/SubTopics found',
       picked: _.map(this.selectedNodes, 'identifier'),
       onSubmit: (selectedNodes) => {

@@ -1,4 +1,3 @@
-import { OfflineFileUploaderService } from '../../../../../offline/services';
 import { combineLatest, Subject } from 'rxjs';
 import { PageApiService, OrgDetailsService, UserService, SearchService, FrameworkService } from '@sunbird/core';
 import { PublicPlayerService } from './../../../../services';
@@ -10,14 +9,15 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash-es';
 import { IInteractEventEdata, IImpressionEventInput } from '@sunbird/telemetry';
-import { takeUntil, map, mergeMap, first, filter } from 'rxjs/operators';
+import { takeUntil, map, mergeMap, first, filter, tap } from 'rxjs/operators';
 import { CacheService } from 'ng2-cache-service';
-import { DownloadManagerService } from './../../../../../offline/services';
 import { environment } from '@sunbird/environment';
 import { IPagination } from '@sunbird/announcement';
 import { ICard } from '@sunbird/shared';
 import { PaginationService } from '@sunbird/shared';
 // import { open } from 'fs';
+
+
 @Component({
   selector: 'app-explore-component',
   templateUrl: './explore.component.html',
@@ -71,22 +71,23 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
   public facetsList: any;
   public paginationDetails: IPagination;
   public contentList: Array<ICard> = [];
+  showDownloadLoader = false;
+  sectionObj: { slug: any, sectionUrl: string, pageNumber: number, queryParams: any};
 
+  sectionData = false;
   @HostListener('window:scroll', []) onScroll(): void {
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight * 2 / 3)
       && this.pageSections.length < this.carouselMasterData.length) {
       this.pageSections.push(this.carouselMasterData[this.pageSections.length]);
     }
   }
-  constructor(private pageApiService: PageApiService, private toasterService: ToasterService,
-    public offlineFileUploaderService: OfflineFileUploaderService, public searchService: SearchService,
+  constructor(private pageApiService: PageApiService, private toasterService: ToasterService, public searchService: SearchService,
     public paginationService: PaginationService, public resourceService: ResourceService,
     private configService: ConfigService, private activatedRoute: ActivatedRoute,
     public router: Router, private utilService: UtilService, private orgDetailsService: OrgDetailsService,
     private publicPlayerService: PublicPlayerService, private cacheService: CacheService,
     private browserCacheTtlService: BrowserCacheTtlService, private userService: UserService,
-    public navigationhelperService: NavigationHelperService,
-    public downloadManagerService: DownloadManagerService, public frameworkService: FrameworkService) {
+    public navigationhelperService: NavigationHelperService, public frameworkService: FrameworkService ) {
     this.router.onSameUrlNavigation = 'reload';
     this.filterType = this.configService.appConfig.explore.filterType;
     this.paginationDetails = this.paginationService.getPager(0, 1, this.configService.appConfig.SEARCH.PAGE_LIMIT);
@@ -112,16 +113,7 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     );
 
-    if (this.isOffline) {
-      const self = this;
-      this.offlineFileUploaderService.isUpload.subscribe(() => {
-        self.fetchPageData();
-      });
-
-      this.downloadManagerService.downloadListEvent.subscribe((data) => {
-        this.updateCardData(data);
-      });
-    }
+    
   }
 
   public getFilters(filters) {
@@ -146,62 +138,7 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   private fetchPageData() {
     let option;
-   if (this.slug === 'sbwb') {
-    //  console.log('in explore page');
-    const filters = _.pickBy(this.queryParams, (value: Array<string> | string, key) => {
-      if (_.includes(['sort_by', 'sortType', 'appliedFilters'], key)) {
-        return false;
-      }
-      return value.length;
-    });
-    const softConstraintData = {
-      filters: {
-        channel: this.hashTagId,
-        board: [this.dataDrivenFilters.board]
-      },
-      // softConstraints: _.get(this.activatedRoute.snapshot, 'data.softConstraints'),
-      mode: 'soft'
-    };
-    const manipulatedData = this.utilService.manipulateSoftConstraint(_.get(this.queryParams, 'appliedFilters'),
-      softConstraintData);
-     option = {
-      organisationId: this.organisationId,
-      source: 'web',
-      name: 'Explore',
-      filters: _.get(this.queryParams, 'appliedFilters') ? filters : _.get(manipulatedData, 'filters'),
-      mode: _.get(manipulatedData, 'mode'),
-      exists: [],
-      params: this.configService.appConfig.ExplorePage.contentApiQueryParams
-    };
-    if (_.get(manipulatedData, 'filters')) {
-      option['softConstraints'] = _.get(manipulatedData, 'softConstraints');
-    }
-    /*
-    adding channel code in the filters to show relevant courses only
-
-    change made by RISHABH KALRA, NIIT LTD on 12-06-2019
-    */
-   option.filters['channel'] = [this.hashTagId];
-
-    this.pageApiService.getPageData(option)
-      .subscribe(data => {
-        this.showLoader = false;
-        this.carouselMasterData = this.prepareCarouselData(_.get(data, 'sections'));
-        if (!this.carouselMasterData.length) {
-          return; // no page section
-        }
-        if (this.carouselMasterData.length >= 2) {
-          this.pageSections = [this.carouselMasterData[0], this.carouselMasterData[1]];
-        } else if (this.carouselMasterData.length >= 1) {
-          this.pageSections = [this.carouselMasterData[0]];
-        }
-      }, err => {
-        this.showLoader = false;
-        this.carouselMasterData = [];
-        this.pageSections = [];
-        this.toasterService.error(this.resourceService.messages.fmsg.m0004);
-      });
-   }
+   
    if (this.slug === 'sunbirdorg') {
  //  console.log('in explore page');
  let filters = _.pickBy(this.queryParams, (value: Array<string> | string) => value && value.length);
@@ -269,8 +206,7 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
                         this.configService.appConfig.SEARCH.PAGE_LIMIT);
                     this.toasterService.error(this.resourceService.messages.fmsg.m0051);
                 });
-   }
-   if (this.slug === 'space') {
+   } else if (this.slug === 'space') {
     const filters = _.pickBy(this.queryParams, (value: Array<string> | string, key) => {
       if (_.includes(['sort_by', 'sortType', 'appliedFilters'], key)) {
         return false;
@@ -314,7 +250,6 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     /*
     adding channel code in the filters to show relevant courses only
-
     change made by RISHABH KALRA, NIIT LTD on 12-06-2019
     */
    console.log('q params in explore page = ', this.queryParams);
@@ -351,6 +286,60 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
   });
 //  this.contentCompositeSearch(option);
  this.callingPageApi(option);
+   } else if (this.slug !== 'sunbirdorg' && this.slug !== 'space') {
+    //  console.log('in explore page');
+    const filters = _.pickBy(this.queryParams, (value: Array<string> | string, key) => {
+      if (_.includes(['sort_by', 'sortType', 'appliedFilters'], key)) {
+        return false;
+      }
+      return value.length;
+    });
+    const softConstraintData = {
+      filters: {
+        channel: this.hashTagId,
+        board: [this.dataDrivenFilters.board]
+      },
+      // softConstraints: _.get(this.activatedRoute.snapshot, 'data.softConstraints'),
+      mode: 'soft'
+    };
+    const manipulatedData = this.utilService.manipulateSoftConstraint(_.get(this.queryParams, 'appliedFilters'),
+      softConstraintData);
+     option = {
+      organisationId: this.organisationId,
+      source: 'web',
+      name: 'Explore',
+      filters: _.get(this.queryParams, 'appliedFilters') ? filters : _.get(manipulatedData, 'filters'),
+      mode: _.get(manipulatedData, 'mode'),
+      exists: [],
+      params: this.configService.appConfig.ExplorePage.contentApiQueryParams
+    };
+    if (_.get(manipulatedData, 'filters')) {
+      option['softConstraints'] = _.get(manipulatedData, 'softConstraints');
+    }
+    /*
+    adding channel code in the filters to show relevant courses only
+    change made by RISHABH KALRA, NIIT LTD on 12-06-2019
+    */
+   option.filters['channel'] = [this.hashTagId];
+
+    this.pageApiService.getPageData(option)
+      .subscribe(data => {
+        this.showLoader = false;
+        this.carouselMasterData = this.prepareCarouselData(_.get(data, 'sections'));
+        if (!this.carouselMasterData.length) {
+          return; // no page section
+        }
+        if (this.carouselMasterData.length >= 2) {
+          this.pageSections = [this.carouselMasterData[0], this.carouselMasterData[1]];
+        } else if (this.carouselMasterData.length >= 1) {
+          this.pageSections = [this.carouselMasterData[0]];
+        }
+      }, err => {
+        this.showLoader = false;
+        this.carouselMasterData = [];
+        this.pageSections = [];
+        this.toasterService.error(this.resourceService.messages.fmsg.m0004);
+      });
    }
   }
   contentCompositeSearch(option) {
@@ -397,8 +386,14 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       if (this.carouselMasterData.length >= 2) {
         this.pageSections = [this.carouselMasterData[0], this.carouselMasterData[1]];
+        if(this.slug === 'space') {
+          this.viewAll(this.pageSections[0]);
+        }
       } else if (this.carouselMasterData.length >= 1) {
         this.pageSections = [this.carouselMasterData[0]];
+        if(this.slug === 'space') {
+          this.viewAll(this.pageSections)
+        }
       }
     }, err => {
       this.showLoader = false;
@@ -438,12 +433,14 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // For offline environment content will only play when event.action is open
     if (event.action === 'download' && this.isOffline) {
-      this.startDownload(event.data.metaData.identifier);
+    //  this.startDownload(event.data.metaData.identifier);
+      this.showDownloadLoader = true;
+      this.contentName = event.data.name;
       return false;
     } else if (event.action === 'export' && this.isOffline) {
       this.showExportLoader = true;
       this.contentName = event.data.name;
-      this.exportOfflineContent(event.data.metaData.identifier);
+    //  this.exportOfflineContent(event.data.metaData.identifier);
       return false;
     }
 
@@ -459,21 +456,31 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   public viewAll(event) {
-    const searchQuery = JSON.parse(event.searchQuery);
-    const softConstraintsFilter = {
-      board: [this.dataDrivenFilters.board],
-      channel: this.hashTagId,
-    };
-    if (_.includes(this.router.url, 'browse') || !this.isOffline) {
-      searchQuery.request.filters.defaultSortBy = JSON.stringify(searchQuery.request.sort_by);
-      searchQuery.request.filters.softConstraintsFilter = JSON.stringify(softConstraintsFilter);
-      searchQuery.request.filters.exists = searchQuery.request.exists;
+    if (event) {
+
+      const searchQuery = JSON.parse(event.searchQuery);
+      const softConstraintsFilter = {
+        board: [this.dataDrivenFilters.board],
+        channel: this.hashTagId,
+      };
+      if (_.includes(this.router.url, 'browse') || !this.isOffline) {
+        searchQuery.request.filters.defaultSortBy = JSON.stringify(searchQuery.request.sort_by);
+        searchQuery.request.filters.softConstraintsFilter = JSON.stringify(softConstraintsFilter);
+        searchQuery.request.filters.exists = searchQuery.request.exists;
+      }
+      this.cacheService.set('viewAllQuery', searchQuery.request.filters);
+      this.cacheService.set('pageSection', event, { maxAge: this.browserCacheTtlService.browserCacheTtl });
+      const queryParams = { ...searchQuery.request.filters, ...this.queryParams };
+      const sectionUrl = this.router.url.split('?')[0] + '/view-all/' + event.name.replace(/\s/g, '-');
+      this.sectionObj = {
+        slug: this.slug,
+        sectionUrl : sectionUrl,
+        pageNumber : 1,
+        queryParams : queryParams
+      };
+      this.sectionData = true;
     }
-    this.cacheService.set('viewAllQuery', searchQuery.request.filters);
-    this.cacheService.set('pageSection', event, { maxAge: this.browserCacheTtlService.browserCacheTtl });
-    const queryParams = { ...searchQuery.request.filters, ...this.queryParams };
-    const sectionUrl = this.router.url.split('?')[0] + '/view-all/' + event.name.replace(/\s/g, '-');
-    this.router.navigate([sectionUrl, 1], { queryParams: queryParams });
+   // this.router.navigate([sectionUrl, 1], { queryParams: queryParams });
   }
   ngAfterViewInit() {
     setTimeout(() => {
@@ -517,58 +524,14 @@ export class ExploreComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  startDownload (contentId) {
-    this.downloadManagerService.downloadContentId = contentId;
-    this.downloadManagerService.startDownload({}).subscribe(data => {
-      this.downloadManagerService.downloadContentId = '';
-    }, error => {
-      this.downloadManagerService.downloadContentId = '';
-      _.each(this.pageSections, (pageSection) => {
-        _.each(pageSection.contents, (pageData) => {
-          pageData['addedToLibrary'] = false;
-          pageData['showAddingToLibraryButton'] = false;
-        });
-      });
-      this.toasterService.error(this.resourceService.messages.fmsg.m0090);
-    });
-  }
+  
 
-  exportOfflineContent(contentId) {
-    this.downloadManagerService.exportContent(contentId).subscribe(data => {
-      const link = document.createElement('a');
-      link.href = data.result.response.url;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      this.showExportLoader = false;
-    }, error => {
-      this.showExportLoader = false;
-      this.toasterService.error(this.resourceService.messages.fmsg.m0091);
-    });
-  }
-
-  updateCardData(downloadListdata) {
-    _.each(this.pageSections, (pageSection) => {
-      _.each(pageSection.contents, (pageData) => {
-
-        // If download is completed card should show added to library
-        _.find(downloadListdata.result.response.downloads.completed, (completed) => {
-          if (pageData.metaData.identifier === completed.contentId) {
-            pageData['addedToLibrary'] = true;
-            pageData['showAddingToLibraryButton'] = false;
-          }
-        });
-
-        // If download failed, card should show again add to library
-        _.find(downloadListdata.result.response.downloads.failed, (failed) => {
-          if (pageData.metaData.identifier === failed.contentId) {
-            pageData['addedToLibrary'] = false;
-            pageData['showAddingToLibraryButton'] = false;
-          }
-        });
-      });
-    });
-  }
+  // updateCardData(downloadListdata) {
+  //   _.each(this.pageSections, (pageSection) => {
+  //     _.each(pageSection.contents, (pageData) => {
+  //       this.publicPlayerService.updateDownloadStatus(downloadListdata, pageData);
+  //     });
+  //   });
+  // }
 
 }

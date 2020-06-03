@@ -7,12 +7,17 @@
 .ui.selection.multiselect-square-border .multi-select-dropdown.multi-select-padding {
   padding: 7px 5px !important;
 }
+::ng-deep .ui.multiple.dropdown .text {
+  font-size: 14px !important;
+  font-family: 'MontserratRegular_2';
+  font-weight: 400 !important;
+}
 .template-checkbox {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap !important;
   align-items: center;
-  font-size: 12px !important;
+  font-size: 13px !important;
   line-height: 1.4;
 }
 .ui.selection.multiselect-square-border {
@@ -33,4 +38,7 @@
 // }
 .option-text {
   padding: 5px !important;
+}
+.full-width {
+  width: 100% !important;
 }

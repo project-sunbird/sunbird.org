@@ -17,24 +17,24 @@
     width: 100%;
     color: #000;
    } 
- .text-c{
-     width: 54rem;
-     margin: auto;
-     display: block;
-     font-size: 17px;
-     font-family: 'Muli', sans-serif;
-     margin-bottom: 1rem !important;
- }
+//  .text-c{
+//      width: 54rem;
+//      margin: auto;
+//      display: block;
+//      font-size: 17px;
+//      font-family: 'Muli', sans-serif;
+//      margin-bottom: 1rem !important;
+//  }
  .fa-1{
   font-size: 32px;
-  font-weight: 700;
-  font-family: 'Muli',sans-serif,Bold;
+ // font-weight: 700;
+  font-family: 'CampaignMedium',Bold;
   margin-bottom: 0!important;
  }
  .text-1{
   font-size: 24px;
   font-style: italic;
-  font-family: Muli,sans-serif;
+  font-family: 'CampaignMedium';
  }
 p {
   margin: 0 0 1rem;
@@ -45,7 +45,9 @@ p {
   margin: auto;
   display: block;
   font-size: 17px;
-  font-family: 'Muli',sans-serif;
+  font-family: 'MontserratRegular_2';
+  font-weight: 400 !important;
+  
   margin-bottom: 1rem!important;
  }
  .pb-5 {

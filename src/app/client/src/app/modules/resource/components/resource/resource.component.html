@@ -1,45 +1,46 @@
 <div  [appTelemetryImpression]="telemetryImpression">
-<app-prominent-filter [pageId]="'sharedassets'" *ngIf="initFilters && slug !== 'space'" [filterEnv]="filterType" [ignoreQuery]="['key']"
-  [accordionDefaultOpen]=true [isShowFilterLabel]=true [showSearchedParam]=true [isShowFilterLabel]=true
-  [hashTagId]="hashTagId" (prominentFilter)="getFilters($event)"></app-prominent-filter>
-
- <app-space-prominent-filter [pageId]="'sharedassets'" *ngIf="initFilters && slug === 'space'" [filterEnv]="filterType" [ignoreQuery]="['key']"
-  [accordionDefaultOpen]=true [isShowFilterLabel]=true [showSearchedParam]=true [isShowFilterLabel]=true [slugInfo]="slug"
-  [hashTagId]="hashTagId" (prominentFilter)="getFilters($event)"></app-space-prominent-filter>
-<!--other org page section !-->
-<div class="ui container mt-8" *ngIf="slug !=='space'">
-  <div *ngIf="!showLoader" class="ui grid stackable my-0">
-    <div class="twelve wide column" *ngFor="let section of pageSections;let last = last"
-      [ngClass]="{'last mb-30':last}">
-      <app-page-section (visits)="prepareVisits($event)" (playEvent)="playContent($event)" [section]="section" [slug]="slug" *ngIf="slug !== 'space'"
-        (viewAll)="viewAll($event)"></app-page-section>
-    </div>
-    <div class="twelve wide column" *ngIf="carouselMasterData.length === 0 && !showLoader">
-      <app-no-result [data]="noResultMessage"></app-no-result>
-    </div>
-  </div>
-  <div *ngIf="showLoader" class="ui grid stackable my-0">
-    <div class="twelve wide column">
-      <app-loader [data]='loaderMessage'></app-loader>
-    </div>
-  </div>
-</div> 
-<!--other org page section ended-->
-<!--space org page section-->
-<div class="ui container width" *ngIf="slug === 'space'">
-    <div class="ui grid stackable my-0">
-      <div class="twelve wide column mb-30"  [ngClass]="{'last mb-30':last}">
-        <app-space-page-section *ngIf="slug === 'space'" [enable]="true" (visits)="prepareVisits($event)" (playEvent)="playContent($event)" [section]="carouselData" [slug]="slug"
-        (viewAll)="viewAll($event)">
-        </app-space-page-section>
-       </div>
-      <div class="twelve wide column" *ngIf="showLoader">
-        <app-loader [data]='loaderMessage'></app-loader>
+  <app-prominent-filter [pageId]="'sharedassets'" *ngIf="initFilters && slug !== 'space'" [filterEnv]="filterType" [ignoreQuery]="['key']"
+    [accordionDefaultOpen]=true [isShowFilterLabel]=true [showSearchedParam]=true [isShowFilterLabel]=true
+    [hashTagId]="hashTagId" (prominentFilter)="getFilters($event)"></app-prominent-filter>
+  
+   <app-space-prominent-filter [pageId]="'sharedassets'" *ngIf="initFilters && slug === 'space'" [filterEnv]="filterType" [ignoreQuery]="['key']"
+    [accordionDefaultOpen]=true [isShowFilterLabel]=true [showSearchedParam]=true [isShowFilterLabel]=true [slugInfo]="slug"
+    [hashTagId]="hashTagId" (prominentFilter)="getFilters($event)"></app-space-prominent-filter>
+  <!--other org page section !-->
+  <div class="ui container mt-8" *ngIf="slug !=='space'">
+    <div *ngIf="!showLoader" class="ui grid stackable my-0">
+      <div class="twelve wide column" *ngFor="let section of pageSections;let last = last"
+        [ngClass]="{'last mb-30':last}">
+        <app-page-section (visits)="prepareVisits($event)" (playEvent)="playContent($event)" [section]="section" [slug]="slug" *ngIf="slug !== 'space'"
+          (viewAll)="viewAll($event)"></app-page-section>
       </div>
-      <div class="twelve wide column" *ngIf="carouselData.length === 0 && !showLoader">
+      <div class="twelve wide column" *ngIf="carouselMasterData.length === 0 && !showLoader">
         <app-no-result [data]="noResultMessage"></app-no-result>
       </div>
     </div>
-<!--space org page section ended-->
-</div>
-</div>
+    <div *ngIf="showLoader" class="ui grid stackable my-0">
+      <div class="twelve wide column">
+        <app-loader [data]='loaderMessage'></app-loader>
+      </div>
+    </div>
+  </div> 
+  <!--other org page section ended-->
+  <!--space org page section-->
+  <div class="ui container width" *ngIf="slug === 'space'">
+      <div class="ui grid stackable my-0">
+        <div class="twelve wide column mb-30"  [ngClass]="{'last mb-30':last}">
+          <!-- <app-space-page-section *ngIf="slug === 'space'" [enable]="true" (visits)="prepareVisits($event)" (playEvent)="playContent($event)" [section]="carouselData" [slug]="slug"
+          (viewAll)="viewAll($event)">
+          </app-space-page-section> -->
+          <app-space-view-all *ngIf="sectionData === true && slug === 'space' && carouselData.length !== 0" [sectionObj]="sectionObj"></app-space-view-all>
+         </div>
+        <div class="twelve wide column" *ngIf="showLoader">
+          <app-loader [data]='loaderMessage'></app-loader>
+        </div>
+        <div class="twelve wide column" *ngIf="carouselData.length === 0 && !showLoader">
+          <app-no-result [data]="noResultMessage"></app-no-result>
+        </div>
+      </div>
+  <!--space org page section ended-->
+  </div>
+  </div>

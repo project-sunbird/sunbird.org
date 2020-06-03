@@ -98,7 +98,7 @@ export class PublicCourseComponent implements OnInit, OnDestroy, AfterViewInit {
     const framework = this.cacheService.get('framework' + 'search');
     if (framework) {
       return of(framework);
-    } else if (this.slug === 'education' || this.slug === 'sbwb') {
+    } else if (this.slug !== 'sunbirdorg' && this.slug !== 'space') {
             this.frameworkservice.getDefaultFrameWork(hashTagId).subscribe((frameworkdata) => {
               console.log('Framework data of education', frameworkdata);
               const frameWork = frameworkdata.result.channel.defaultFramework;

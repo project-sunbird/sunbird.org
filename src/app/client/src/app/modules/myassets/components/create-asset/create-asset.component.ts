@@ -167,7 +167,7 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
       this.configService.appConfig.contentName[this.contentType] : 'Untitled';
     this.description = this.configService.appConfig.contentDescription[this.contentType] ?
       this.configService.appConfig.contentDescription[this.contentType] : 'Untitled';
-      this.state = 'allcontent';
+    this.state = 'allcontent';
   }
 
 
@@ -187,25 +187,26 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
           this.userProfile = user.userProfile;
         }
       });
-      const req = {
-        url: `${this.configService.urlConFig.URLS.CONTENT.GET}/${this.activatedRoute.snapshot.params.contentId}/?mode=edit`,
-      };
-      this.contentService.get(req).subscribe(data => {
-        console.log('read content', data);
-        this.content = data.result.content;
-        if (data.result.content.artifactUrl && data.result.content.mimeType !== 'video/x-youtube'
+    const req = {
+      url: `${this.configService.urlConFig.URLS.CONTENT.GET}/${this.activatedRoute.snapshot.params.contentId}/?mode=edit`,
+    };
+    this.contentService.get(req).subscribe(data => {
+      console.log('read content', data);
+      this.content = data.result.content;
+      if (data.result.content.artifactUrl && data.result.content.mimeType !== 'video/x-youtube'
         && data.result.content.mimeType !== 'text/x-url') {
-          this.enabled = true;
-          this.uploadedcontent = data.result.content.artifactUrl.substring(data.result.content.artifactUrl.lastIndexOf('/')).slice(1);
+        this.enabled = true;
+        this.uploadedcontent = data.result.content.artifactUrl.substring(data.result.content.artifactUrl.lastIndexOf('/')).slice(1);
 
-        } else if (data.result.content.mimeType === 'application/vnd.ekstep.ecml-archive') {
+      } else if (data.result.content.mimeType === 'application/vnd.ekstep.ecml-archive') {
         this.enableContent = true;
-               } else {
-         this.enableLink = true;
-               }
-        // this.formInputData['gradeLevel'] = this.mutateData(data.result.asset.gradeLevel)
-        // this.formInputData['versionKey'] = data.result.asset.versionKey;
-      });
+      } else if(data.result.content.mimeType === 'application/pdf') {
+      } else {
+        this.enableLink = true;
+      }
+      // this.formInputData['gradeLevel'] = this.mutateData(data.result.asset.gradeLevel)
+      // this.formInputData['versionKey'] = data.result.asset.versionKey;
+    });
     this.telemetryImpression = {
       context: {
         env: 'asset-update-page'
@@ -230,7 +231,7 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
   fetchFrameworkMetaData() {
 
     if (this._cacheService.exists(this.contentType + this.formAction) &&
-    this._cacheService.exists('SpaceCategoryMasterListforLiveContentUpdate')) {
+      this._cacheService.exists('SpaceCategoryMasterListforLiveContentUpdate')) {
       this.categoryMasterList = this._cacheService.get('SpaceCategoryMasterListforLiveContentUpdate');
       this.formFieldProperties = this._cacheService.get(this.contentType + this.formAction);
     }
@@ -314,20 +315,20 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
     const requestData = _.cloneDeep(data);
     console.log('generate data = ', requestData);
     requestData.name = data.name ? data.name : this.name,
-    requestData.assetformat = data.assetformat ? data.assetformat : null;
-    requestData.licensetype = data.licensetype ? data.licensetype : null ;
-      requestData.description = data.description ? data.description : this.description,
+      requestData.assetformat = data.assetformat ? data.assetformat : null;
+    requestData.licensetype = data.licensetype ? data.licensetype : null;
+    requestData.description = data.description ? data.description : this.description,
       requestData.createdBy = this.userProfile.id,
       requestData.organisation = this.userProfile.organisationNames,
       requestData.createdFor = this.userProfile.organisationIds,
       requestData.contentType = this.configService.appConfig.contentCreateTypeForEditors[this.contentType],
       requestData.framework = this.framework;
-      requestData.keywords = _.uniqWith(requestData.keywords, _.isEqual);
-      requestData['tags'] = requestData.keywords;
-      requestData.version =  parseFloat(requestData.version);
-     delete requestData.status;
-   // delete requestData.framework;
-   // delete requestData.contentType;
+    requestData.keywords = _.uniqWith(requestData.keywords, _.isEqual);
+    requestData['tags'] = requestData.keywords;
+    requestData.version = parseFloat(requestData.version);
+    delete requestData.status;
+    // delete requestData.framework;
+    // delete requestData.contentType;
 
     if (this.contentType === 'studymaterial' && data.link && data.mimeType === 'text/x-url') {
       requestData.mimeType = 'text/x-url';
@@ -347,10 +348,10 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
     }
     if (!_.isEmpty(this.userProfile.lastName)) {
       requestData.creator = this.userProfile.firstName + ' ' + this.userProfile.lastName;
-    //  requestData.submittedBy = this.userProfile.firstName + ' ' + this.userProfile.lastName;
+      //  requestData.submittedBy = this.userProfile.firstName + ' ' + this.userProfile.lastName;
     } else {
       requestData.creator = this.userProfile.firstName;
-     // requestData.submittedBy = this.userProfile.firstName + ' ' + this.userProfile.lastName;
+      // requestData.submittedBy = this.userProfile.firstName + ' ' + this.userProfile.lastName;
     }
     return requestData;
   }
@@ -359,15 +360,30 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
     this.formData.formInputData['assetformat'] = this.formData['assetformat'];
     this.formData.formInputData['licensetype'] = this.formData['licensetype'];
     this.formData.formInputData['artifactUrl'] = this.content.artifactUrl;
-   this.formData.formInputData['link'] = this.content.artifactUrl;
+    this.formData.formInputData['link'] = this.content.artifactUrl;
     const data = _.pickBy(this.formData.formInputData);
     console.log('data in update form = ', data);
-    if (!!data.name && !!data.assetformat && !!data.licensetype && !!data.board && !!data.description
-      && (!!data.keywords && data.keywords.length > 0) && !!data.creators &&
-      !!data.version && !!data.region && !!data.year && (!!data.languages && data.languages.length > 0)) {
+    // if (!!data.name && !!data.assetformat && !!data.licensetype && !!data.board && !!data.description
+    //   && (!!data.keywords && data.keywords.length > 0) && !!data.creators &&
+    //   !!data.version && !!data.region && !!data.year && (!!data.languages && data.languages.length > 0)) {
+
+    // this.uploadSuccess = true;
+    // this.updateContent();
+    // }
+    if (!!data.name && !!data.description && (!!data.keywords && data.keywords.length > 0 && this.enableLink)
+    ) {
+
 
       this.uploadSuccess = true;
       this.updateContent();
+    } else if (!!data.name && !!data.description && (!!data.keywords && data.keywords.length > 0 &&
+      !!data.assetformat && !!data.licensetype && !!data.board && !!data.creators && !!data.version
+      && (!!data.languages && data.languages.length > 0) &&
+      !this.enableLink)) {
+
+      this.uploadSuccess = true;
+      this.updateContent();
+
     } else {
       this.showMessage = true;
       this.toasterService.error('Asset updation failed please provide required fields');
@@ -375,13 +391,13 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
   }
   checkFieldofFile() {
 
-   this.formData.formInputData['assetformat'] = this.formData['assetformat'];
-   this.formData.formInputData['licensetype'] = this.formData['licensetype'];
-   this.formData.formInputData['artifactUrl'] = this.content.artifactUrl;
-   this.formData.formInputData['link'] = this.content.artifactUrl;
+    this.formData.formInputData['assetformat'] = this.formData['assetformat'];
+    this.formData.formInputData['licensetype'] = this.formData['licensetype'];
+    this.formData.formInputData['artifactUrl'] = this.content.artifactUrl;
+    this.formData.formInputData['link'] = this.content.artifactUrl;
     const data = _.pickBy(this.formData.formInputData);
-    if (!!data.name &&  !!data.assetformat && !!data.licensetype && !!data.board && !!data.description  &&
-       (!!data.keywords && data.keywords.length > 0) && !!data.creators &&
+    if (!!data.name && !!data.assetformat && !!data.licensetype && !!data.board && !!data.description &&
+      (!!data.keywords && data.keywords.length > 0) && !!data.creators &&
       !!data.version && !!data.region && !!data.year && (!!data.languages && data.languages.length > 0)) {
       this.uploadSuccess = true;
       this.updatebtnStatus = true;
@@ -393,7 +409,7 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
       //     this.toasterService.error('File size should be less than 50MB');
       //   }
       // } else {
-        this.updateContent();
+      this.updateContent();
 
       // }
 
@@ -434,11 +450,11 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
         this.goToCreate();
       }, err => {
         this.toasterService.error('Asset updation failed please try after some time');
-        this.updatebtnStatus =  false;
+        this.updatebtnStatus = false;
       });
     } else {
       this.toasterService.error('Asset updation failed please try after ');
-      this.updatebtnStatus =  false;
+      this.updatebtnStatus = false;
     }
   }
 
@@ -499,8 +515,8 @@ export class CreateAssetComponent extends MyAsset implements OnInit, OnDestroy {
   }
   contentClick() {
     if (_.size(this.content.lockInfo)) {
-        this.lockPopupData = this.content;
-        this.showLockedContentModal = true;
+      this.lockPopupData = this.content;
+      this.showLockedContentModal = true;
     } else {
       const status = this.content.status.toLowerCase();
       if (status === 'processing') {

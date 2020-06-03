@@ -5,7 +5,7 @@
     border: 0;
     border-color: transparent;
     padding: 0 !important;
-    /* background-image: url('../../../../../assets/images/banner_bg.jpg'); */
+    /* background-image: url('../../../../../assets/images/spacebannernew.jpg'); */
   }
 
   .caption {
@@ -20,16 +20,25 @@
     margin: auto;
     display: block;
     font-size: 17px;
-    font-family: 'Muli', sans-serif;
+    font-weight: 400 !important;
+    font-family: 'MontserratRegular_2';
+  }
+  .text-ac {
+    font-family: 'CampaignMedium';
+    color: white;
+    // font-weight: bold;
   }
   .text p {
     line-height: 2em;
     font-size: 17px;
   }
+  .jumbotron {
+    background-color: #686365;
+  }
   .cimage{
-    background-image: url('../../../../../assets/images/slide-04.png');
+    background-image: url('../../../../../assets/space/AssetGuidelinesBanner.png');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-position: center;
   }
   li {
     line-height: 2em;

@@ -19,7 +19,10 @@
 </div>
 <app-sunbird-footer  *ngIf= "enableTenantHeader ==='sunbirdorg'"></app-sunbird-footer>
 <app-space-footer *ngIf= " enableTenantHeader ==='space'"></app-space-footer>
-<app-footer *ngIf= "enableTenantHeader !=='sunbirdorg' && enableTenantHeader !=='space' && (enableTenantHeader ==='sbwb' || enableTenantHeader === 'education' )"></app-footer>
+<ng-container *ngIf= "enableTenantHeader && enableTenantHeader !=='sunbirdorg' && enableTenantHeader !=='space'">
+  <app-footer ></app-footer>
+
+</ng-container>
 
 
 <sui-modal [mustScroll]="false" [isClosable]="false" [transitionDuration]="0" [size]="'small'" class="sb-modal"

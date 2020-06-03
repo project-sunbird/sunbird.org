@@ -7,7 +7,8 @@ import {
 } from '@sunbird/shared';
 import { Component, HostListener, OnInit, ViewChild, Inject, OnDestroy, AfterViewInit } from '@angular/core';
 import { UserService, PermissionService, CoursesService, TenantService, OrgDetailsService, DeviceRegisterService,
-  SessionExpiryInterceptor } from '@sunbird/core';
+  SessionExpiryInterceptor, 
+  FormService} from '@sunbird/core';
 import * as _ from 'lodash-es';
 import { ProfileService } from '@sunbird/profile';
 import { Observable, of, throwError, combineLatest } from 'rxjs';
@@ -17,6 +18,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { debug } from 'util';
 import { ShepherdService } from 'angular-shepherd';
 import {builtInButtons, defaultStepOptions} from './shepherd-data';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 
@@ -64,6 +66,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
    * 2. user profile rootOrg hashtag for logged in
    */
   private channel: string;
+
+
+  private formServiceInputParams = {
+    formType: 'rootOrgTitle',
+    formAction: 'getTitle',
+    contentType: 'orgTitle',
+    rootOrgId: 'none'
+  };
   /**
    * constructor
    */
@@ -83,6 +93,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   shepherdData: Array<any>;
   private fingerprintInfo: any;
   hideHeaderNFooter = true;
+  title: any;
   constructor(private cacheService: CacheService, private browserCacheTtlService: BrowserCacheTtlService,
     public userService: UserService, private navigationHelperService: NavigationHelperService,
     private permissionService: PermissionService, public resourceService: ResourceService,
@@ -91,7 +102,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     private orgDetailsService: OrgDetailsService, private activatedRoute: ActivatedRoute,
     private profileService: ProfileService, private toasterService: ToasterService, public utilService: UtilService,
     @Inject(DOCUMENT) private _document: any, public sessionExpiryInterceptor: SessionExpiryInterceptor,
-    private shepherdService: ShepherdService) {
+    private shepherdService: ShepherdService, public formService: FormService) {
       this.instance = (<HTMLInputElement>document.getElementById('instance'))
         ? (<HTMLInputElement>document.getElementById('instance')).value : 'sunbird';
         this.toasterService = toasterService;
@@ -131,7 +142,20 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       }))
       .subscribe(data => {
         this.tenantService.getTenantInfo(this.slug);
-        this.setPortalTitleLogo();
+       // this.title = data['rootOrg'] ? data['rootOrg'].description : data.description;
+       if (this.slug) {
+         this.formService.getFormConfig(this.formServiceInputParams).subscribe( (res) => {
+          res.forEach( (item) => {
+            if (this.slug === item['code']) {
+              this.title = item['label'];
+              this.setPortalTitleLogo();
+            }
+          });
+         },
+         (err) => {
+
+         });
+       }
         this.telemetryService.initialize(this.getTelemetryContext());
         this.logCdnStatus();
         this.setFingerPrintTelemetry();
@@ -346,15 +370,7 @@ setFingerPrintTelemetry() {
    */
   private setPortalTitleLogo(): void {
     localStorage.setItem('tenant', this.slug);
-    if (this.slug === 'space') {
-      this.tenantname = 'SPace';
-    } else if (this.slug === 'sbwb') {
-       this.tenantname = 'World Bank';
-    } else if (this.slug === 'sunbirdorg') {
-       this.tenantname = 'Sunbird';
-         } else if (this.slug === 'education') {
-          this.tenantname = 'Education';
-            }
+    this.tenantname = this.title;
   this.tenantService.tenantData$.subscribe(data => {
       if (!data.err) {
         document.title = this.tenantname || this.userService.rootOrgName ;

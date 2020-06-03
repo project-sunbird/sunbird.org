@@ -1,3 +1,9 @@
+.menu-bar {
+	margin-left: 30px !important;
+}
+.fl-wrap {
+	flex-wrap: wrap;;
+}
 @media screen and (max-width:600px){
 .col-xxs-3{width:25% !important; padding-left:15px; padding-right:15px; position:relative; float:left;}
 .col-xxs-4{width:33.33% !important; padding-left:15px; padding-right:15px; position:relative;float:left;}
@@ -10,6 +16,40 @@
 .site-2{width:30%;}
 .site-3{width:70%;}
 .site-4{width:30%;}
+.justify-center {
+	justify-content: center;
+}
+.slide-details{
+	font-size: 12px !important;
+	transform: translate(-50%,32%) !important;
+}
+.text {
+	display: none !important;
+}
+.col2 {
+	width: 70%;
+}
+.menu-bar {
+	margin-left: 0px !important;
+	width: 100%;
+}
+.menuItem {
+	display: block;
+    text-align: center;
+}
+.menu-container {
+	width: 100% !important;
+}
+.menu-items {
+	width: 100%;
+}
+.sunblogin {
+	margin: auto !important;
+}
+.footer-sec2 {
+	width: 100%;
+	text-align: center;
+}
 }
 @media screen and (max-width:480px){
 .col-xxxs-1{width:8.33% !important; padding-left:15px; padding-right:15px; position:relative;float:left;}
@@ -27,15 +67,95 @@ footer{text-align:center;}
 .site-2{width:30%;}
 .site-3{width:100%;}
 .site-4{width:100%;}
-
+.justify-center {
+	justify-content: center;
+}
+.slide-details{
+	font-size: 12px !important;
+	transform: translate(-50%,32%) !important;
+}
+.text {
+	display: none !important;
+}
+.col2 {
+	width: 70%;
+}
+.menu-bar {
+	margin-left: 0px !important;
+	width: 100%;
+}
+.menuItem {
+	display: block;
+    text-align: center;
+}
+.menu-container {
+	width: 100% !important;
+}
+.menu-items {
+	width: 100%;
+}
+.sunblogin {
+	margin: auto !important;
+}
+.footer-sec2 {
+	width: 100%;
+	text-align: center;
+}
 }
 
+@media (max-width: 767.98px) { 
+	.justify-center {
+		justify-content: center;
+	}
+	.slide-details{
+		font-size: 12px !important;
+		transform: translate(-50%,32%) !important;
+	}
+	.text {
+		display: none !important;
+	}
+	.col2 {
+		width: 70%;
+	}
+	.menu-bar {
+		margin-left: 0px !important;
+		width: 100%;
+	}
+	.menuItem {
+		display: block;
+		text-align: center;
+	}
+	.menu-container {
+		width: 100% !important;
+	}
+	.menu-items {
+		width: 100%;
+	}
+	.sunblogin {
+		margin: auto !important;
+	}
+}
 body{
 	font-family: 'Muli', sans-serif;
 	overflow-x: hidden;
 }
+@font-face {
+	font-family: 'CampaignMedium';
+	src: url('../fonts/CampaignMedium.woff');
+	font-style: normal !important;
+	font-weight: 500 !important;
+}
+@font-face {
+    font-family: 'MontserratRegular_2';
+    src: url('../fonts/montserrat/Montserrat-Regular.ttf');
+    font-style: normal !important;
+    font-weight: 400;
+  }
 .margint5{
 	margin-top:5px;
+}
+.partnerTitle {
+	font-family: 'CampaignMedium' !important;
 }
 .padding10{
 	padding:10px;
@@ -459,6 +579,9 @@ address{margin:0;}
 		font-size:22px;
 		/* text-shadow:1px 1px 1px #000; */
 		/* width:90%; */
+		position: absolute;
+    left: 0;
+    bottom: 0;
 		width: auto;
 		padding:20px 30px;
 	}
@@ -492,7 +615,7 @@ address{margin:0;}
 		font-size:22px;
 	}
 	.slide-details{
-		transform:translate(-50%,-60%);
+		transform: translate(10%,30%);
 	}
 	.slide-actions{
 		padding:10px 0;
@@ -608,21 +731,22 @@ address{margin:0;}
     margin: auto;
     display: block;
 	font-size: 17px;
-	color: #FFFFFF;
-    font-family: 'Muli', sans-serif;
+	color: black;
+    font-family: 'MontserratRegular_2';
+    font-weight: 400;
   }
   .btn-purple {
-	background-color: #a8abe3 !important;
+	background-color: #865BA0 !important;
 	border-radius:4px !important;
 	border: none;
 	color:#fff !important;
 	border-radius: 5px;
 	height: 40px;
-	font-family: "Muli",sans-serif;
+	font-family: 'MontserratRegular_2';
 	font-size: 15px;
 	width: fit-content;
 	/* text-transform: uppercase; */
-	font-weight: 700;
+	font-weight: 400;
 	box-shadow: none;
 	cursor: pointer;
   }
@@ -630,8 +754,10 @@ address{margin:0;}
     align-items: center !important;
 }
 .image {
-	height: 44px !important;
-	max-height: 56px;
+	/*
+	 height: 44px !important;
+	 */
+	/* max-height: 56px; */
     vertical-align: middle;
     border-style: none;
 }
@@ -692,11 +818,7 @@ address{margin:0;}
   .nav-item{
 	color: white !important;
   }
-  #ab{
-	border-radius:4px !important;
-	text-align: center;
-	font-weight: bold;
-  }
+  
   .green1 {
 	background-color:lightgreen !important;
   }
@@ -792,7 +914,22 @@ address{margin:0;}
 	border-width: 2px;
 	margin-right: 10px;
   }
-  
+  a.links {
+	font-family: 'CampaignMedium' !important;
+	font-size: 1.25em;
+    padding: 14px;
+}
+#ab{
+	border-radius:4px !important;
+	text-align: center;
+	font-style: 'MontserratRegular_2' !important;
+	font-weight: 400 !important;
+	z-index: 11;
+	font-size: 1.25em !important;
+	height: 47px;
+	padding: 15px !important;
+	margin: 4px;
+  }
   .ui.icon.button {
 	background: #edf4f9;
 	padding: 1px 7px 4px 7px;
@@ -902,7 +1039,10 @@ address{margin:0;}
     /* display: flex; */
 	align-items: center;
 	cursor: pointer;
-	opacity: 0.8;
+	/* opacity: 0.8; */
+}
+a.menuItem:hover {
+	color: #865BA0;
 }
 a:not([href]):not([tabindex]) {
     /* color: inherit; */
@@ -1012,9 +1152,6 @@ font-family: 'Muli', sans-serif;
     font-size: 16px;
     color: #585858;
 }
-.image{
-    height: 44px !important;
-}
 /* hr{
     border: none !important;
     border-left: 1px solid gray !important;
@@ -1044,11 +1181,12 @@ a:hover, a:active {
 .ft-1 a {
     text-decoration: none;
     font-size:1.3em;
-    color: #707070 !important;
+	font-family: 'MontserratRegular_2';
+    color:black!important;
     cursor: pointer;
 }
 .footer__right__content {
-    color: #bababa;
+    color: black;
     font-weight: 400;
     margin-bottom: 15px;
     font-size: 13px;
@@ -1148,6 +1286,36 @@ a:hover {
 }
 @media (min-width: 1200px) {
 .col-lg-6 {
-    width: 46%;
+    width: 43%;
 }
+}
+.computer.only {
+    width: max-content;
+}
+.text-purple{
+	text-decoration: none;
+color:#865BA0 !important;
+}
+@media all and (min-width: 768px) and (max-width: 971px) {
+	.modify-header {
+		flex-direction: row;
+    	flex-wrap: inherit;
+	}
+	.text {
+		display: none !important;
+	}
+	.justify-center {
+		justify-content: center;
+	}
+	.slide-details{
+		position: absolute;
+    	left: 40%;
+	}
+	.col2 {
+		width: 70%;
+	}
+	.footer-sec2 {
+		width: 100%;
+    	text-align: center;
+	}
 }

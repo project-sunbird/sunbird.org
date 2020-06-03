@@ -27,11 +27,11 @@
               {{resourceService.frmelmnts?.lnk?.footerDikshaVerticals}}
             </a>
           </li> -->
-                    <li class="mb-15">
+                    <!-- <li class="mb-15">
                         <div appTelemetryInteract [telemetryInteractEdata]="setTelemetryInteractEdata('help-center')">
                             {{resourceService.frmelmnts?.lnk?.footerHelpCenter}}
                         </div>
-                    </li>
+                    </li> -->
                     <!-- <li class="mb-15">
             <a href="/partners/">
               {{resourceService.frmelmnts?.lnk?.footerPartners}}
@@ -63,10 +63,10 @@
           {{resourceService.frmelmnts?.lnk?.footerContact}}
         </label>
                 <div appTelemetryInteract [telemetryInteractEdata]="setTelemetryInteractEdata('fresh-desk')" class="d-block mb-30">
-                    support@sunbird-ncte.freshdesk.com
+                    info@sunbird.org
                 </div>
                 <label class=" d-block ">
-          <a appTelemetryInteract [telemetryInteractEdata]="setTelemetryInteractEdata( 't&c') " href="/term-of-use.html ">
+          <a appTelemetryInteract [telemetryInteractEdata]="setTelemetryInteractEdata( 't&c') " target="_blank" href="https://www.sunbird.org/sandbox-terms-conditions">
             {{resourceService.frmelmnts?.lnk?.footerTnC}}
           </a>
           <span>| &copy; {{date | date:'yyyy'}}, SUNBIRD</span>
@@ -80,7 +80,7 @@
         {{resourceService.frmelmnts?.lnk?.footerContact}}
       </label>
             <div appTelemetryInteract [telemetryInteractEdata]="setTelemetryInteractEdata( 'fresh-desk') " class="d-block mb-30 ">
-                support@sunbird-ncte.freshdesk.com
+                info@sunbird.org
             </div>
         </div>
     </div>

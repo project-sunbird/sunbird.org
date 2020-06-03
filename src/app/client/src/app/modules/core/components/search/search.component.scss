@@ -100,3 +100,15 @@
 //     top: 0rem;
 // }
 }
+@media screen and (min-width:312px) and (max-width:424px) {
+  .ui.small.input {
+    width: 85% !important;
+    margin-left: -33px;
+  }
+}
+@media screen and (max-width:765px) and (min-width:425px) {
+  .ui.small.input {
+    width: 85% !important;
+    margin-left: -33px;
+  }
+}

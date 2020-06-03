@@ -1,42 +1,63 @@
 <div class="card  mb-5" *ngIf="data" (click)="onAction(data,data.action.onImage, $event, data?.source)">
-    <div class="card-header" style="background: #585858"
-      (click)="onAction(data,data.action.onImage, $event, data?.source)">
-      <div class="row">
-        <div class="thick-gray-border sprite knowledgeimg" *ngIf="data?.board === 'Knowledge'">
-        </div>
-        <div class="thick-gray-border sprite hardwareimg" *ngIf="data?.board === 'Hardware'">
-        </div>
-        <div class="thick-gray-border sprite softwareimg" *ngIf="data?.board === 'Software'">
-        </div>
-        <div class="thick-gray-border sprite processimg" *ngIf="data?.board === 'Process'">
-        </div>
-        <div class="thick-gray-border sprite dataimg" *ngIf="data?.board === 'Data'">
-        </div>
-        <div class="col-sm-8">
-          <div class="text-light pt-3">
-            <h5 class="card-title" id="res-title">{{data?.name | titlecase | slice:0:25}}<span
-                *ngIf="data.name && data.name.length > 25">...</span></h5>
-            <p class="card-text1 text-light" id="res-para">version : {{data?.version}}.0</p>
-          </div>
-        </div>
-        <button *ngIf="data?.ribbon?.left?.image" type="button" class="btn text-light float-right badgesprite badgeimg "
-          id="styletick">
-  
-        </button>
+  <div class="card-header" style="background: #865BA0"
+    (click)="onAction(data,data.action.onImage, $event, data?.source)">
+    <div class="row">
+      <div class="thick-gray-border sprite knowledgeimg" *ngIf="data?.board === 'Knowledge'">
       </div>
-  
+      <div class="thick-gray-border sprite hardwareimg" *ngIf="data?.board === 'Hardware'">
+      </div>
+      <div class="thick-gray-border sprite softwareimg" *ngIf="data?.board === 'Software'">
+      </div>
+      <div class="thick-gray-border sprite processimg" *ngIf="data?.board === 'Process'">
+      </div>
+      <div class="thick-gray-border sprite dataimg" *ngIf="data?.board === 'Data'">
+      </div>
+      <div class="col-sm-8">
+        <div class="text-light pt-3">
+          <h5 class="card-title" id="res-title" data-toggle="tooltip" data-placement="top" title="{{data?.name}}">{{data?.name | titlecase | slice:0:25}}<span
+              *ngIf="data.name && data.name.length > 25" >...</span></h5>
+          <p class="card-text1 text-light" id="res-para">version : {{data?.version}}.0</p>
+        </div>
+      </div>
+      <button *ngIf="data?.ribbon?.left?.image" type="button" class="btn text-light float-right badgesprite badgeimg "
+        id="styletick">
+
+      </button>
     </div>
-    <div class="card-body" (click)="onAction(data,data.action.onImage, $event, data?.link)">
-      <div class="details">
-        <!-- <span class="creator" *ngIf="data?.creators !== 'SPace'">Created By : {{data?.creators | titlecase}}</span> -->
-        <span class="creator" *ngIf="data?.creators">Created By : {{data?.creators }}</span>
-        <span class="creator contentlink" *ngIf="data?.mimeType === 'text/x-url' && data?.link" id="link">Link : {{data?.link}}</span>
-        <!-- <span class="creator" *ngIf="data?.region ">Country : {{data?.region | titlecase}}</span> -->
-        <span class="creator" *ngIf="data?.year">Created Year : {{data?.year}}</span>
-      </div>
-      <hr>
-      <div class="card-text pt-1 text-secondary fs-1-16">{{data?.description | titlecase | slice:0:60}} <span
-          *ngIf="data.description && data.description.length > 60">...</span></div>
+
+  </div>
+  <div class="card-body" (click)="onAction(data,data.action.onImage, $event, data?.link)">
+    <div class="details">
+      <!-- <span class="creator" *ngIf="data?.creators !== 'SPace'">Created By : {{data?.creators | titlecase}}</span> -->
+      <!-- <span class="creator" *ngIf="data?.creators">Created By : {{data?.creators }}</span> -->
+      <span data-toggle="tooltip" data-placement="top" title="{{data?.description}}" class="creator" *ngIf="data.description">Description : 
+        <span >{{data?.description | titlecase | slice:0:60}}</span> 
+        <span *ngIf="data.description && data.description.length > 60">...</span>
+      </span>
+     
+    
+      <span data-toggle="tooltip" data-placement="top" title="{{keywordsString.slice(0,keywordsString.length-1)}}" class="creator" *ngIf="data?.keywords && data?.keywords.length > 0">
+        Keywords :
+        <span *ngIf="keywordsString.length < 50" class="keyword-name">
+          {{ keywordsString | slice:0:keywordsString.length-1}}
+        </span>
+        <span *ngIf="keywordsString.length > 50" class="keyword-name">
+          {{ keywordsString | slice:0:50}}
+        </span>
+        <span *ngIf="keywordsString.length > 50">...</span>
+      </span>
+
+    
+      <span class="creator contentlink" *ngIf="data?.mimeType === 'text/x-url' && data?.link" id="link">Link :
+      <span class="text-purple">{{data?.link}}</span></span>
+
+    
+      <!-- <span class="creator" *ngIf="data?.region ">Country : {{data?.region | titlecase}}</span> -->
+      <span class="creator" *ngIf="data?.year">Created Year : {{data?.year}}</span>
+    </div>
+    <hr>
+    <div class="created-by">
+      <span style="font-weight: bolder;" class="creator" *ngIf="data?.creators">Created By: {{data?.creators }}</span>
     </div>
   </div>
-  
+</div>

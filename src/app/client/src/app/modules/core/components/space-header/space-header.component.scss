@@ -23,11 +23,20 @@
   }
 }
 .text{
-  font-family:'Muli' !important; 
+  font-family:'CampaignMedium' !important; 
+ // font-weight: 400;
+  font-size: 1.2em;
   color: black !important;
 }
 .ui.basic.button.qr-code-btn.disabled {
   opacity: 0.7 !important;
+}
+a.item:hover {
+  color: #865BA0 !important;
+}
+a.item {
+  font-family: 'CampaignMedium';
+  font-size: 1.25em;
 }
 .item1 {
 // color: black!important;
@@ -50,23 +59,28 @@ transition: opacity .1s ease;
     color: white;
     font-weight: bold;
 }
-#a {
-  font-family: 'Muli', sans-serif;
-}
+// #a {
+//   font-family: 'Muli', sans-serif;
+// }
 .nav-item{
   color: white !important;
 }
 #ab{
   border-radius:4px !important;
   text-align: center;
-  font-weight: bold;
+  font-family: 'MontserratRegular_2' !important;
+  font-weight: 400 !important;
   color: white !important;
+  height: 46px;
+}
+.sunblogin {
+  background-color: #865BA0 !important;
 }
 .green1 {
   background-color:lightgreen !important;
 }
 .primary-header .logo img {
-  height: 44px !important;
+  // height: 44px !important;
 }
 .ui.text.menu .item {
   color: white !important;
@@ -105,14 +119,16 @@ background: #007b5e;
   background-color: transparent;
   border-color: transparent transparent #f3f3f3;
   border-bottom: 4px solid !important;
-  font-size: 13px !important;
+  font-size: 17px !important;
   font-weight: bold;
 }
 .nav-tabs[_ngcontent-c2] .nav-link.active[_ngcontent-c2] {
   font-size: 13px !important;
   color:white;
 }
-
+.btn-purple {
+  background-color: #865BA0 !important;
+}
 // @media only screen and (max-width: 767px) {
 //   .primary-searchbar-alignment {
 //     width: 100%;  
@@ -143,9 +159,9 @@ background: #007b5e;
   }
 }
 
-.primary-nav-item .item {
-  font-size: 1rem;
-}
+// .primary-nav-item .item {
+//   font-size: 1rem;
+// }
 
 .ui.menu .primary-nav-item a.item.active {
   background: none;
@@ -191,7 +207,9 @@ background: #007b5e;
     color: black
   }
 }
-
+.profiledropdown {
+  width: 35%;
+}
 ::ng-deep {
   .ui.fluid.action.input.primary-search-input {
     height: 39px;
@@ -212,6 +230,12 @@ background: #007b5e;
 
 .profile-avtar:hover{
   opacity:1;
+}
+
+@media screen and (max-width:1034px) {
+  .profiledropdown {
+    width: 60% !important;
+  }
 }
 
 @media screen and (max-width:374px ) and (min-width: 312px) {
@@ -314,7 +338,7 @@ background: #007b5e;
 }
 @media (min-width: 992px) {
 .col-lg-9 {
-    max-width: 79% !important;
+    max-width: 100% !important;
 }
 }
 @media only screen and (min-width: 766px) and (max-width: 1024px) {
@@ -355,7 +379,7 @@ i {
   border: 1px solid green;
 }
 .tr {
-  background: dimgrey;
+  background: #865BA0;
   color: white;
 }
 
@@ -396,8 +420,8 @@ div.ui.menu.bs-0.main-header.d-block   {
 }
 @media screen and (max-width: 1226  px) and (min-width: 1026px){
 .primary-header .logo img {
-  height: 44px !important;
-  width: 17rem !important;
+ // height: 44px !important;
+ // width: 17rem !important;
 }
 }
 @media screen and (max-width: 689px) and (min-width: 374px){

@@ -13,10 +13,17 @@ export class SpaceCardLoggedinComponent implements OnInit {
   @Input() customClass: string;
   @Output() clickEvent = new EventEmitter<any>();
   url: any;
-
+keywordsString='';
   constructor(public router: Router) { }
 
   ngOnInit() {
+    if(this.data['keywords'] && this.data['keywords'].length > 0) {
+
+      this.keywordsString = '';
+      this.data['keywords'].forEach(element => {
+    this.keywordsString = this.keywordsString + element + ',';
+    });
+  }
   }
   public onAction(data, action, event, link) {
     this.url = link;

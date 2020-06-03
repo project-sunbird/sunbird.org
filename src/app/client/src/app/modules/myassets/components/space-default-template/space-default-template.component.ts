@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter, ViewChild, OnDestroy, OnChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ResourceService, ConfigService, ToasterService, ServerResponse, IUserData, IUserProfile, Framework } from '@sunbird/shared';
 import { FormService, FrameworkService, UserService } from '@sunbird/core';
@@ -18,8 +18,12 @@ declare var $: any;
   styleUrls: ['./space-default-template.component.scss']
 })
 export class SpaceDefaultTemplateComponent implements OnInit,  AfterViewInit, OnDestroy {
+  toUploadFile = false;
   @Input() formFieldProperties: any;
   @Input() categoryMasterList: any;
+  @Input() set uploadContent(radiobtnFlag){
+     this.toUploadFile = radiobtnFlag;
+  }
   @Input() submited: boolean;
   @Input() org: string;
 
@@ -422,10 +426,10 @@ console.log('coutry and language list = ', this.configService.countryConfig, thi
     this.contentlicenses = result[0];
     this.softwarelicenses = result[1];
     this.newcontentlicenseobject = this.getDataofform(this.contentlicenses);
-    this.dropdownitems.push('Other');
+   // this.dropdownitems.push('Other');
     this.map.set('Content', this.dropdownitems);
     this.newsoftwarelicenseobject = this.getDataofform(this.softwarelicenses);
-    this.dropdownitems.push('Other');
+  //  this.dropdownitems.push('Other');
     this.map.set('Software Code', this.dropdownitems);
   });
   }
@@ -455,4 +459,3 @@ console.log('coutry and language list = ', this.configService.countryConfig, thi
    $('sui-modal').css('display', 'none');
   }
 }
-

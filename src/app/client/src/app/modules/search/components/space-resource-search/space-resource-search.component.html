@@ -50,9 +50,9 @@
               *ngIf="!showLoader && contentList.length" class="ui stackable row dynamic-section-card ">
               <div in-view-item [id]="i" [data]="content" class="column pl-10"
                   *ngFor="let content of contentList;let i = index;">
-                  <app-space-card appTelemetryInteract [telemetryInteractEdata]="cardIntractEdata" [slug]= "slugInfo"
+                  <app-space-card-loggedin appTelemetryInteract [telemetryInteractEdata]="cardIntractEdata" [slug]= "slugInfo"
                       [telemetryInteractObject]="{id:content.metaData.identifier,type:content.metaData.contentType || 'content',ver:'1.0'}"
-                      (clickEvent)="playContent($event)" [data]="content"></app-space-card>
+                      (clickEvent)="playContent($event)" [data]="content"></app-space-card-loggedin>
               </div>
           </div>
           <div *ngIf="contentList.length === 0 && !showLoader">

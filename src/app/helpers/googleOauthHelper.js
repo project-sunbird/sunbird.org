@@ -8,7 +8,8 @@ const envHelper = require('./environmentVariablesHelper.js')
 const request = require('request-promise'); //  'request' npm package with Promise support
 const uuid = require('uuid/v1')
 const dateFormat = require('dateformat')
-
+'use strict';
+var sessionstorage = require('sessionstorage');
 const keycloakGoogle = getKeyCloakClient({
   resource: envHelper.KEYCLOAK_GOOGLE_CLIENT.clientId,
   bearerOnly: true,
@@ -106,6 +107,8 @@ const createUserWithMailId = async (accountDetails, client_id, req) => {
   if (!accountDetails.name || accountDetails.name === '') {
     throw new Error('USER_NAME_NOT_PRESENT');
   }
+  console.log(sessionstorage.getItem('tenant'));
+  const channelName = sessionstorage.getItem('tenant');
   const options = {
     method: 'POST',
     url: envHelper.LEARNER_URL + 'user/v2/create',
@@ -118,6 +121,7 @@ const createUserWithMailId = async (accountDetails, client_id, req) => {
       request: {
         firstName: accountDetails.name,
         email: accountDetails.emailId,
+        channel: channelName,
         emailVerified: true
       }
     },

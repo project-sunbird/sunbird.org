@@ -1,6 +1,6 @@
 import { filter, first } from 'rxjs/operators';
 import { UserService, PermissionService, TenantService, OrgDetailsService, FormService } from './../../services';
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit , Input } from '@angular/core';
 import { ConfigService, ResourceService, IUserProfile, IUserData } from '@sunbird/shared';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import * as _ from 'lodash-es';
@@ -8,13 +8,14 @@ import { IInteractEventObject, IInteractEventEdata } from '@sunbird/telemetry';
 import { CacheService } from 'ng2-cache-service';
 import { environment } from '@sunbird/environment';
 declare var jQuery: any;
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './main-header.component.html'
 })
 export class MainHeaderComponent implements OnInit, AfterViewInit {
-
+  @Input() routerEvents;
   languageFormQuery = {
     formType: 'content',
     formAction: 'search',
@@ -24,11 +25,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   queryParam: any = {};
   showExploreHeader = false;
   showQrmodal = false;
+  showAccountMergemodal = false;
   tenantInfo: any = {};
   userProfile: IUserProfile;
   adminDashboard: Array<string>;
   announcementRole: Array<string>;
   myActivityRole: Array<string>;
+  orgAdminRole: Array<string>;
   orgSetupRole: Array<string>;
   avtarMobileStyle = {
     backgroundColor: 'transparent',
@@ -68,6 +71,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   slugInfo: any;
   showOfflineHelpCentre = false;
   exploreRoutingUrl: string;
+  tenantValue: string;
 
   constructor(public config: ConfigService, public resourceService: ResourceService, public router: Router,
     public permissionService: PermissionService, public userService: UserService, public tenantService: TenantService,
@@ -82,12 +86,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       this.announcementRole = this.config.rolesConfig.headerDropdownRoles.announcementRole;
       this.myActivityRole = this.config.rolesConfig.headerDropdownRoles.myActivityRole;
       this.orgSetupRole = this.config.rolesConfig.headerDropdownRoles.orgSetupRole;
+      this.orgAdminRole = this.config.rolesConfig.headerDropdownRoles.orgAdminRole;
   }
   ngOnInit() {
       window.sessionStorage.clear();
     console.log('activated route', this.activatedRoute);
     if (this.userService.loggedIn) {
-      this.userService.userData$.pipe(first()).subscribe((user: any) => {
+      this.userService.userData$.subscribe((user: any) => {
         if (user && !user.err) {
           this.userProfile = user.userProfile;
           this.slugInfo = this.userProfile.channel;
@@ -97,6 +102,9 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     } else {
 
       this.slug = this.activatedRoute.firstChild.firstChild.children[0].params['value'].slug;
+      if(this.slug) {
+        this.tenantValue = this.slug;
+      }
       this.slugInfo = 'loggedIn';
           this.showExploreHeader = true;
       this.orgDetailsService.orgDetails$.pipe(first()).subscribe((data) => {
@@ -109,7 +117,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.activatedRoute.queryParams.subscribe(queryParams => this.queryParam = { ...queryParams });
     this.tenantService.tenantData$.subscribe(({tenantData}) => {
       this.tenantInfo.logo = tenantData ? tenantData.logo : undefined;
-      this.tenantInfo.titleName = tenantData ? tenantData.titleName.toUpperCase() : undefined;
+      this.tenantInfo.titleName = (tenantData && tenantData.titleName) ? tenantData.titleName.toUpperCase() : undefined;
     });
     this.setInteractEventData();
     this.cdr.detectChanges();
@@ -154,7 +162,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     } else if (this.userService.loggedIn) {
       this.router.navigate(['resources']);
     } else {
-      window.location.href = this.slug ? this.slug  : '';
+      window.location.href = this.slug ? (this.slug + '/explore-library')  : (this.tenantValue + '/explore-library');
     }
   }
   onEnter(key) {
@@ -298,9 +306,6 @@ if (key.length > 0) {
   }
 
   logout() {
-    if (this.slugInfo === 'MHRD') {
-      this.slugInfo = 'education';
-    }
     window.location.replace(`/${this.slugInfo}/logoff`);
     this.cacheService.removeAll();
   }

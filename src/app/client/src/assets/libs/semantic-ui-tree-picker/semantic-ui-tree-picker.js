@@ -7,12 +7,19 @@ var conceptModal;
     picked = [];
     nodes = [];
     tabs = {};
+    tenant = options.tenant;
+    
     options.noDataMessage = options.noDataMessage ? options.noDataMessage : 'no results';
     $("#" + options.nodeName).length == 0 ? '' : $("#" + options.nodeName).remove();
-    /*Modal HTML Starts*/
-    modalTemplate = "<div class=\"sb-modal\"><div id=\""+options.nodeName+"\" class=\"ui normal modal visible active sb-treePicker\"><!--Header--><i class=\"close icon js-close-modal\"></i><div class=\"sb-modal-header\">"+options.name+"</div> <!--/Header--><!--Content--><div class=\"sb-modal-content p-0\"><div class=\"sb-treePicker-body\"><!--Selection Section--><div class=\"sb-treePicker-selectionSection\"><!--Search Box--><div class=\"sb-search-box no-btn\"><div class=\"input-div relative\"><i class=\"search icon sb-search-icon\"></i><input class=\"sb-search-input\" type=\"text\" placeholder=\"Search\" /><i class=\"close icon js-clear d-none\"></i></div></div><!--/Search Box--><div class=\"tree-tab\"><div></div></div><div class=\"search-tab\"></div></div><!--/Selection Section--><!--Selected Section--><div class=\"sb-treePicker-selectedSection\"><div class=\"d-flex flex-ai-center\">Selected"+' '+ options.name +"<span class=\"sb-treePicker-selected-count ml-5\"></span><button class=\"unpick-picked ml-auto sb-btn sb-btn-outline-error sb-btn-xs sb-left-icon-btn\"><i class=\"trash icon\"></i>Remove All</button></div><div class=\"picked-tab py-15\"></div></div><!--/Selected Section--></div></div><!--/Content--><!--Actions--><div class=\"sb-modal-actions\"><a class=\"pick-search d-none\"><i class=\"checkmark icon\"></i>Choose All</a><a class=\"unpick-search d-none\"><i class=\"remove icon\"></i>Remove All</a><button class=\"btn btn-purple accept\">Submit</button><button class=\"btn btn-lightgrey  js-close-modal\" style=\"margin-right:1rem;\">Cancel</button></div><!--/Actions--></div></div>";
+    if(tenant === 'space') {
+          /*Modal HTML Starts*/
+    modalTemplate = "<div class=\"sb-modal\"><div id=\""+options.nodeName+"\" class=\"ui normal modal visible active sb-treePicker\"><!--Header--><i class=\"close icon js-close-modal\"></i><div class=\"sb-modal-header\">"+options.name+"</div> <!--/Header--><!--Content--><div class=\"sb-modal-content p-0\"><div class=\"sb-treePicker-body\"><!--Selection Section--><div class=\"sb-treePicker-selectionSection\"><!--Search Box--><div class=\"sb-search-box no-btn\"><div class=\"input-div relative\"><i class=\"search icon sb-search-icon\"></i><input class=\"sb-search-input\" type=\"text\" placeholder=\"Search\" /><i class=\"close icon js-clear d-none\"></i></div></div><!--/Search Box--><div class=\"tree-tab\"><div></div></div><div class=\"search-tab\"></div></div><!--/Selection Section--><!--Selected Section--><div class=\"sb-treePicker-selectedSection\"><div class=\"d-flex flex-ai-center\">Selected"+' '+ options.name +"<span class=\"sb-treePicker-selected-count ml-5\"></span><button class=\"unpick-picked ml-auto sb-btn sb-btn-outline-error sb-btn-xs sb-left-icon-btn\"><i class=\"trash icon\"></i>Remove All</button></div><div class=\"picked-tab py-15\"></div></div><!--/Selected Section--></div></div><!--/Content--><!--Actions--><div class=\"sb-modal-actions\"><a class=\"pick-search d-none\"><i class=\"checkmark icon\"></i>Choose All</a><a class=\"unpick-search d-none\"><i class=\"remove icon\"></i>Remove All</a><button id=\"accepttopic\" class=\"btn btn-purple2 accept\">Submit</button><button id=\"closemodal\" class=\"btn btn-lightgrey2  js-close-modal\" style=\"margin-right:1rem;\">Cancel</button></div><!--/Actions--></div></div>";
     /*Modal HTML Ends*/
-
+    } else {
+    /*Modal HTML Starts*/
+    modalTemplate = "<div class=\"sb-modal\"><div id=\""+options.nodeName+"\" class=\"ui normal modal visible active sb-treePicker\"><!--Header--><i class=\"close icon js-close-modal\"></i><div class=\"sb-modal-header\">"+options.name+"</div> <!--/Header--><!--Content--><div class=\"sb-modal-content p-0\"><div class=\"sb-treePicker-body\"><!--Selection Section--><div class=\"sb-treePicker-selectionSection\"><!--Search Box--><div class=\"sb-search-box no-btn\"><div class=\"input-div relative\"><i class=\"search icon sb-search-icon\"></i><input class=\"sb-search-input\" type=\"text\" placeholder=\"Search\" /><i class=\"close icon js-clear d-none\"></i></div></div><!--/Search Box--><div class=\"tree-tab\"><div></div></div><div class=\"search-tab\"></div></div><!--/Selection Section--><!--Selected Section--><div class=\"sb-treePicker-selectedSection\"><div class=\"d-flex flex-ai-center\">Selected"+' '+ options.name +"<span class=\"sb-treePicker-selected-count ml-5\"></span><button class=\"unpick-picked ml-auto sb-btn sb-btn-outline-error sb-btn-xs sb-left-icon-btn\"><i class=\"trash icon\"></i>Remove All</button></div><div class=\"picked-tab py-15\"></div></div><!--/Selected Section--></div></div><!--/Content--><!--Actions--><div class=\"sb-modal-actions\"><a class=\"pick-search d-none\"><i class=\"checkmark icon\"></i>Choose All</a><a class=\"unpick-search d-none\"><i class=\"remove icon\"></i>Remove All</a><button id=\"accepttopic\" class=\"btn btn-purple accept\">Submit</button><button id=\"closemodal\" class=\"btn btn-lightgrey  js-close-modal\" style=\"margin-right:1rem;\">Cancel</button></div><!--/Actions--></div></div>";
+    /*Modal HTML Ends*/
+    }
     modal = $(modalTemplate).modal({
       duration: 200,
       allowMultiple: true
@@ -69,11 +76,20 @@ var conceptModal;
       $('.sb-modal .ui.modal.normal').removeClass('visible');
       widget.on('click', function (e) {
         if(config.nodeName === 'framework') {
+          if (tenant === "space") {
+            $(".sb-modal-header").addClass("mauvebackground");
+            $(".mauvebackground").css("background-color","#865BA0");
+            
+            
+          } else {
+            $(".sb-modal-header").removeClass("mauvebackground");
+          }
         $('#framework').addClass('active');
         $('#framework').addClass('visible');
         } else {
           $('#topic').addClass('active');
           $('#topic').addClass('visible');
+          $(".sb-modal-header").removeClass("mauvebackground");
         }
         modal.modal('show');
         if (!nodes.length) {

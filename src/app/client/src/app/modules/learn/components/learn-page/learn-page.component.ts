@@ -272,7 +272,7 @@ export class LearnPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.frameWorkName = framework;
        this.initFilters = true;
       return of(framework);
-    } else if (this.slug === 'education' || this.slug === 'sbwb') {
+    } else if (this.slug !== 'sunbirdorg' && this.slug !== 'space') {
        this.frameworkservice.getDefaultFrameWork(hashTagId).subscribe((frameworkdata) => {
         console.log('Framework data of education', frameworkdata);
         const dfframeWork = frameworkdata.result.channel.defaultFramework;

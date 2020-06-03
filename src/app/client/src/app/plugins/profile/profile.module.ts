@@ -6,10 +6,21 @@ import { SharedModule } from '@sunbird/shared';
 import { SlickModule } from 'ngx-slick';
 import { ProfileRoutingModule } from './profile-routing.module';
 import {
-  ProfilePageComponent, ProfileBadgeComponent, UpdateContactDetailsComponent, UpdateUserDetailsComponent
+  ProfilePageComponent,
+  ProfileBadgeComponent,
+  UpdateContactDetailsComponent,
+  UpdateUserDetailsComponent
 } from './components';
-import { SuiSelectModule, SuiModalModule, SuiAccordionModule, SuiPopupModule, SuiDropdownModule,
-  SuiProgressModule, SuiRatingModule, SuiCollapseModule } from 'ng2-semantic-ui';
+import {
+  SuiSelectModule,
+  SuiModalModule,
+  SuiAccordionModule,
+  SuiPopupModule,
+  SuiDropdownModule,
+  SuiProgressModule,
+  SuiRatingModule,
+  SuiCollapseModule
+} from 'ng2-semantic-ui';
 import { CoreModule } from '@sunbird/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { WebExtensionModule } from '@project-sunbird/web-extensions';
@@ -18,13 +29,20 @@ import { WebExtensionModule } from '@project-sunbird/web-extensions';
 import { AvatarModule } from 'ngx-avatar';
 import { OrgManagementModule } from '../../modules/org-management/org-management.module';
 import { NgInviewModule } from 'angular-inport';
+import { EditemailComponent } from './components/editemail/editemail.component';
 @NgModule({
   imports: [
     CommonModule,
     ProfileRoutingModule,
     SharedModule,
-    SuiSelectModule, SuiModalModule, SuiAccordionModule, SuiPopupModule, SuiDropdownModule,
-    SuiProgressModule, SuiRatingModule, SuiCollapseModule,
+    SuiSelectModule,
+    SuiModalModule,
+    SuiAccordionModule,
+    SuiPopupModule,
+    SuiDropdownModule,
+    SuiProgressModule,
+    SuiRatingModule,
+    SuiCollapseModule,
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
@@ -36,7 +54,13 @@ import { NgInviewModule } from 'angular-inport';
     AvatarModule,
     SharedFeatureModule
   ],
-  declarations: [ProfilePageComponent, ProfileBadgeComponent, UpdateContactDetailsComponent, UpdateUserDetailsComponent],
+  declarations: [
+    ProfilePageComponent,
+    ProfileBadgeComponent,
+    UpdateContactDetailsComponent,
+    UpdateUserDetailsComponent,
+    EditemailComponent
+  ],
   providers: []
 })
-export class ProfileModule { }
+export class ProfileModule {}

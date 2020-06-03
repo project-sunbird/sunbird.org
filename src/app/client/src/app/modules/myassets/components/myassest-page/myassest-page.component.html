@@ -1,137 +1,137 @@
 <div [appTelemetryImpression]="telemetryImpression">
-<app-content-filter *ngIf="!route.isActive('myassets/create', true) && !route.isActive('upForReview', true) " ></app-content-filter>
-
-<div class="container" *ngIf="!route.isActive('myassets/create', true )">
-  <div class="row pt-15" *ngIf="!route.isActive('upForReview', true)">
-    <div class="col" *ngIf='permissionService.permissionAvailable' appPermission [permission]='lessonRole'>
-      <button type="button" class="btn btn-sec text-light float-right" routerLink="/myassets/create"><i class="fas fa-plus"></i> New
-        Asset</button>
+  <app-content-filter *ngIf="!route.isActive('myassets/create', true) && !route.isActive('upForReview', true) " ></app-content-filter>
+  
+  <div class="container" *ngIf="!route.isActive('myassets/create', true )">
+    <div class="row pt-15" *ngIf="!route.isActive('upForReview', true)">
+      <div class="col" *ngIf='permissionService.permissionAvailable' appPermission [permission]='lessonRole'>
+        <button type="button" class="btn btn-sec text-light float-right" routerLink="/myassets/create"><i class="fas fa-plus"></i> New
+          Asset</button>
+      </div>
     </div>
-  </div>
-  <div *ngIf="(noResult && !showLoader) || noResultsForReview === true">
-      <app-no-result [data]="noResultMessage"></app-no-result>
-    </div>
-  <div class="row" *ngIf="allContent.length > 0 && !showLoader && !noResult">
-    <div in-view-item *ngFor="let content of allContent;let i = index;" [id]="i" [data]="content"
-      class="col-md-4 py-3 pl-10">
-      <div *ngIf="content">
-        <div class="card mb-5"  (click)="navigateToDetailsPage(content?.identifier, content?.status, $event, content?.link)">
-
-          <div class="card-header">
-            <div class="row">
-                <div class="thick-gray-border sprite knowledgeimg" *ngIf="content?.board === 'Knowledge'">
-                  </div>
-                  <div class="thick-gray-border sprite hardwareimg" *ngIf="content?.board === 'Hardware'">
-                  </div>
-                  <div class="thick-gray-border  sprite softwareimg" *ngIf="content?.board === 'Software'">
-                  </div>
-                  <div class="thick-gray-border  sprite processimg" *ngIf="content?.board === 'Process'">
-                  </div>
-                  <div class="thick-gray-border  sprite dataimg" *ngIf="content?.board === 'Data'">
-                  </div>
-                  <div class="col-sm-8">
-                      <div class="text-light pt-3">
-                    <h5 class="card-title" id="res-title">{{content?.name | titlecase | slice:0:35}}<span *ngIf="content.name && content.name.length > 35">...</span></h5>
-                    <p class="card-text">version : {{content?.version}}.0</p>
-                  </div>
-                  </div>
-                  <button *ngIf="content?.badgeAssertions" type="button" class="btn text-light float-right badgesprite badgeimg " id="styletick">
-                            
-                  </button> 
-            </div>
-                         </div>
-          <div class="card-body">
-             <!-- <div> <i class="far fa-heart float-right"></i></div> -->
-             <p class="creator mb-0">Created By : {{content?.creators}}</p>
-             <!-- <p class="creator mb-0">Country : {{content?.region}}</p> -->
-             <p class="creator mb-0"> Created Year: {{content?.year}}</p>
-             <p class="creator contentlink mb-0" id="link" *ngIf="content?.mimeType === 'text/x-url' &&content?.link">Link : {{content?.link}}</p>
-            <div class="">  <span class="desc1">Description: </span>   <span class="card-text1">{{content?.description | titlecase | slice:0:60}}</span>   <span *ngIf="content?.description && content.description?.length > 60">...</span></div>
-            
-            <div class="d-flex justify-content-center mt-30">
-              <button *ngIf="(content?.status==='Draft' || content?.status=== 'DRAFT' || content?.status=== 'LIVE' || content?.status=== 'Live') && copied[content['versionKey']] && route.isActive('myassets')" type="button" class="btn text-secondary" id="style"
-                (click)="deleteConfirmModal(content.identifier); $event.stopPropagation()">
-                <i class="trash large icon" style="color: #6c757d!important;"></i>
-              </button>
-              <div *ngIf="content?.status==='Draft'">
-                <button type="button" class="btn ml-4" [disabled]="!!!content.artifactUrl" id="pub" (click)="reviewConfirmModal(content.identifier, content.status); $event.stopPropagation()"><i class="fas fa-upload"></i>&nbsp; SEND FOR REVIEW</button>
+    <div *ngIf="(noResult && !showLoader) || noResultsForReview === true">
+        <app-no-result [data]="noResultMessage"></app-no-result>
+      </div>
+    <div class="row" *ngIf="allContent.length > 0 && !showLoader && !noResult">
+      <div in-view-item *ngFor="let content of allContent;let i = index;" [id]="i" [data]="content"
+        class="col-md-4 py-3 pl-10">
+        <div *ngIf="content">
+          <div class="card mb-5"  (click)="navigateToDetailsPage(content?.identifier, content?.status, $event, content?.link)">
+  
+            <div class="card-header">
+              <div class="row">
+                  <div class="thick-gray-border sprite knowledgeimg" *ngIf="content?.board === 'Knowledge'">
+                    </div>
+                    <div class="thick-gray-border sprite hardwareimg" *ngIf="content?.board === 'Hardware'">
+                    </div>
+                    <div class="thick-gray-border  sprite softwareimg" *ngIf="content?.board === 'Software'">
+                    </div>
+                    <div class="thick-gray-border  sprite processimg" *ngIf="content?.board === 'Process'">
+                    </div>
+                    <div class="thick-gray-border  sprite dataimg" *ngIf="content?.board === 'Data'">
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-light pt-3">
+                      <h5 class="card-title" id="res-title" data-toggle="tooltip" data-placement="top" title="{{content?.name}}">{{content?.name | titlecase | slice:0:35}}<span *ngIf="content.name && content.name.length > 35">...</span></h5>
+                      <p *ngIf="content?.version" class="card-text">version : {{content?.version}}.0</p>
+                    </div>
+                    </div>
+                    <button *ngIf="content?.badgeAssertions" type="button" class="btn text-light float-right badgesprite badgeimg " id="styletick">
+                              
+                    </button> 
               </div>
-              <div *ngIf="(content?.status==='Review') && route.url !== '/upForReview'">
-                <button type="button" class="btn ml-4" id="pub" disabled><i class="fas fa-upload"></i>&nbsp; SUBMITTED FOR REVIEW</button>
+                           </div>
+            <div class="card-body">
+               <!-- <div> <i class="far fa-heart float-right"></i></div> -->
+               <p class="creator mb-0">Created By : {{content?.creators}}</p>
+               <!-- <p class="creator mb-0">Country : {{content?.region}}</p> -->
+               <p *ngIf="content?.year" class="creator mb-0"> Created Year: {{content?.year}}</p>
+               <p class="creator contentlink mb-0" id="link" *ngIf="content?.mimeType === 'text/x-url' &&content?.link">Link : <span class="text-purple">{{content?.link}}</span></p>
+              <div data-toggle="tooltip" data-placement="top" title="{{content?.description}}">  <span  class="desc1">Description: </span>   <span class="card-text1">{{content?.description | titlecase | slice:0:50}}</span>   <span *ngIf="content?.description && content.description?.length > 50">...</span></div>
+              
+              <div class="d-flex justify-content-center mt-30">
+                <button *ngIf="(content?.status==='Draft' || content?.status=== 'DRAFT' || content?.status=== 'LIVE' || content?.status=== 'Live') && copied[content['versionKey']] && route.isActive('myassets')" type="button" class="btn text-secondary" id="style"
+                  (click)="deleteConfirmModal(content.identifier); $event.stopPropagation()">
+                  <i class="trash large icon" style="color: #6c757d!important;"></i>
+                </button>
+                <div *ngIf="content?.status==='Draft'">
+                  <button type="button" class="btn ml-4" [disabled]="!!!content.artifactUrl" id="pub" (click)="reviewConfirmModal(content.identifier, content.status); $event.stopPropagation()"><i class="fas fa-upload"></i>&nbsp; SEND FOR REVIEW</button>
+                </div>
+                <div *ngIf="(content?.status==='Review') && route.url !== '/upForReview'">
+                  <button type="button" class="btn ml-4" id="pub" disabled><i class="fas fa-upload"></i>&nbsp; SUBMITTED FOR REVIEW</button>
+                </div>
+                <div *ngIf="(content?.status==='Review' || content?.status=== 'review' || content?.status==='REVIEW') && route.isActive('upForReview')">
+                  <button type="button" class="btn ml-4" id="pub" (click)=" navigateToReviewAssetDetailsPage(content?.identifier); $event.stopPropagation()"><i class="fas fa-upload"></i>&nbsp; REVIEW</button>
+                </div>
+                <!-- <div *ngIf="content?.status==='Live'">
+                    <button type="button" class="btn ml-4 text-light" id="badge">VERIFY</button>
+                </div> -->
+                <button
+                  *ngIf="(content?.status==='Draft' || content?.status=== 'DRAFT') && route.isActive('myassets')"
+                  type="button" class="btn text-secondary ml-4" id="style"
+                  (click)="navigateToEditPage(content?.identifier, content?.status)">
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+  
+                <button
+                  *ngIf="(content?.status=== 'LIVE' || content?.status=== 'Live') && route.isActive('myassets')"
+                  type="button" class="btn text-secondary ml-4" id="style"
+                  (click)="navigateToMyAssetPage(content?.identifier); $event.stopPropagation()">
+                  <i class="fas fa-pencil-alt"></i>
+                </button>
+  
               </div>
-              <div *ngIf="(content?.status==='Review' || content?.status=== 'review' || content?.status==='REVIEW') && route.isActive('upForReview')">
-                <button type="button" class="btn ml-4" id="pub" (click)=" navigateToReviewAssetDetailsPage(content?.identifier); $event.stopPropagation()"><i class="fas fa-upload"></i>&nbsp; REVIEW</button>
-              </div>
-              <!-- <div *ngIf="content?.status==='Live'">
-                  <button type="button" class="btn ml-4 text-light" id="badge">VERIFY</button>
+              <!-- <div *ngIf="content?.status==='Live'" class="badgedisplay">
               </div> -->
-              <button
-                *ngIf="(content?.status==='Draft' || content?.status=== 'DRAFT') && route.isActive('myassets')"
-                type="button" class="btn text-secondary ml-4" id="style"
-                (click)="navigateToEditPage(content?.identifier, content?.status)">
-                <i class="fas fa-pencil-alt"></i>
-              </button>
-
-              <button
-                *ngIf="(content?.status=== 'LIVE' || content?.status=== 'Live') && route.isActive('myassets')"
-                type="button" class="btn text-secondary ml-4" id="style"
-                (click)="navigateToMyAssetPage(content?.identifier); $event.stopPropagation()">
-                <i class="fas fa-pencil-alt"></i>
-              </button>
-
+  
             </div>
-            <!-- <div *ngIf="content?.status==='Live'" class="badgedisplay">
-            </div> -->
-
           </div>
         </div>
       </div>
     </div>
+  
   </div>
-
-</div>
-
-<!-- <div class="ui grid container">
-  <div class="two wide column"></div>
-  <div class="ten wide column">
-    <div class="pb-10"
-      *ngIf="allContent && totalCount > config.appConfig.WORKSPACE.PAGE_LIMIT && !showLoader && !showError && !noResult">
-      <div class="ui pagination menu mt-10 right-floated p-0 " *ngIf="pager.pages.length ">
-        <a [ngClass]="{disabled:pager.currentPage===1 }" class="item " (click)="navigateToPage(1) ">First</a>
-        <a [ngClass]="{disabled:pager.currentPage===1 }" class="item "
-          (click)="navigateToPage(pager.currentPage - 1)">Previous</a>
-        <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage===page}" (click)="navigateToPage(page)"
-          class="item">{{page}}</a>
-        <a [ngClass]="{disabled:pager.currentPage=== pager.totalPages}" (click)="navigateToPage(pager.currentPage + 1)"
-          class="item">Next</a>
-        <a [ngClass]="{disabled:pager.currentPage=== pager.totalPages}" (click)="navigateToPage(pager.totalPages)"
-          class="item ">Last</a>
+  
+  <!-- <div class="ui grid container">
+    <div class="two wide column"></div>
+    <div class="ten wide column">
+      <div class="pb-10"
+        *ngIf="allContent && totalCount > config.appConfig.WORKSPACE.PAGE_LIMIT && !showLoader && !showError && !noResult">
+        <div class="ui pagination menu mt-10 right-floated p-0 " *ngIf="pager.pages.length ">
+          <a [ngClass]="{disabled:pager.currentPage===1 }" class="item " (click)="navigateToPage(1) ">First</a>
+          <a [ngClass]="{disabled:pager.currentPage===1 }" class="item "
+            (click)="navigateToPage(pager.currentPage - 1)">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage===page}" (click)="navigateToPage(page)"
+            class="item">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage=== pager.totalPages}" (click)="navigateToPage(pager.currentPage + 1)"
+            class="item">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage=== pager.totalPages}" (click)="navigateToPage(pager.totalPages)"
+            class="item ">Last</a>
+        </div>
       </div>
     </div>
+  </div> -->
+  
+  <div class="container mt-20" *ngIf="showLoader ">
+   
+        <app-loader [data]="loaderMessage"></app-loader>
+  
+    </div>
+   
+  <ng-template let-context let-modal="modal" #modalTemplate>
+    <div class="header"> {{ context.data | titlecase}}</div>
+    <div class="content">
+      <p>{{modalMessage}}</p>
+    </div>
+    <div class="actions">
+      <button class="ui btn"  style="background-color: white;border: 1px solid #865BA0;" (click)="modal.deny('denied')">No</button>
+      <button class="ui btn btn-purple ml-20" (click)="modal.approve('approved')" autofocus>Yes</button>
+    </div>
+  </ng-template>
+  
+  
+  
+  <app-contentlock-info-popup [content]="lockPopupData" (closeEvent)="onCloseLockInfoPopup($event)"
+    *ngIf="showLockedContentModal"></app-contentlock-info-popup>
+  
+  <router-outlet></router-outlet>
   </div>
-</div> -->
-
-<div class="container mt-20" *ngIf="showLoader ">
- 
-      <app-loader [data]="loaderMessage"></app-loader>
-
-  </div>
- 
-<ng-template let-context let-modal="modal" #modalTemplate>
-  <div class="header"> {{ context.data | titlecase}}</div>
-  <div class="content">
-    <p>{{modalMessage}}</p>
-  </div>
-  <div class="actions">
-    <button class="ui btn btn-lightgrey" (click)="modal.deny('denied')">No</button>
-    <button class="ui btn btn-purple ml-20" (click)="modal.approve('approved')" autofocus>Yes</button>
-  </div>
-</ng-template>
-
-
-
-<app-contentlock-info-popup [content]="lockPopupData" (closeEvent)="onCloseLockInfoPopup($event)"
-  *ngIf="showLockedContentModal"></app-contentlock-info-popup>
-
-<router-outlet></router-outlet>
-</div>

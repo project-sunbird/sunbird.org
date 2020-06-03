@@ -1093,7 +1093,8 @@
     "courses": "courses",
     "organization": "organization",
     "contentlicenses":"contentlicenses",
-    "softwarelicenses":"softwarelicenses"
+    "softwarelicenses":"softwarelicenses",
+    "orgTitle": "orgTitle"
   },
   "cacheServiceConfig": {
     "setTimeInMinutes": 10,

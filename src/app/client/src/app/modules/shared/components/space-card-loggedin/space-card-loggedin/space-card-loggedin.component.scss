@@ -11,21 +11,28 @@
     width: fit-content; 
     margin-top: 1rem
   }
-
   .smaller-image {
     width: 21px;
     padding-top: 12px;
   }
+  .card-text{
+    min-height: 99px;
+    max-height: 99px;
+
+  }
   .card-text, .card-title{
-    min-height: 45px;
     text-overflow: ellipsis;
     white-space: normal;
     overflow: hidden;
     display: -webkit-box !important;
     -webkit-line-clamp: 2;
-    font-weight: 600;
+   // font-weight: 600;
     margin-bottom: 10px;
-    font-family: 'Muli', sans-serif;
+    font-family: 'CampaignMedium';
+  }
+  span {
+    font-family: 'MontserratRegular_2' !important;
+    font-weight: 400 !important;
   }
   .card-text1{
     min-height: 30px;
@@ -39,7 +46,6 @@
     color: white;
     margin-bottom: 10px;
   }
-  
  .card-img-top{
 background-color: #585858;
   background-repeat: no-repeat;
@@ -56,12 +62,17 @@ background-color: #585858;
  .card {
    height: auto;
    width: 350px;
+   min-height: 335px;
+    max-height: 335px;
    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-   font-family: 'Muli', sans-serif;
+   font-family: 'CampaignMedium';
    cursor: pointer;
  }
  .card-header {
    cursor: pointer;
+   min-height: 131px;
+    max-height: 131px;
+
  }
  .col-sm-8 {
    height: fit-content;
@@ -148,7 +159,7 @@ background-color: #585858;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 15px;
-    color: #686F7A;
+    color: black;
     padding-bottom: 6px;
 }
 
@@ -166,9 +177,7 @@ hr {
   margin-bottom: 2px;
   margin-top: 2px;
 }
-.contentlink{
-  color:#007bff;
-}
+
 .contentlink:hover{
   text-decoration: underline;
   cursor: pointer;

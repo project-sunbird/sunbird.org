@@ -16,10 +16,12 @@
     <div class="fs-2-5 font-w-bold d-flex mb-15 text-center relative position">{{userProfile.firstName | titlecase}} {{userProfile.lastName |
       titlecase}}
       <div class="computer only">
-          <i  *ngIf="!isCustodianOrgUser" suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}" [popupPlacement]="'bottom left'" [popupInverted]="true" class="name-info"></i>  
+        <i *ngIf="!isCustodianOrgUser" suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}"
+          [popupPlacement]="'bottom left'" [popupInverted]="true" class="name-info"></i>
       </div>
       <div class="mobile only name-info-mobile">
-          <i *ngIf="!isCustodianOrgUser" suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}" [popupPlacement]="'bottom right'" [popupInverted]="true" class="name-info"></i>  
+        <i *ngIf="!isCustodianOrgUser" suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}"
+          [popupPlacement]="'bottom right'" [popupInverted]="true" class="name-info"></i>
       </div>
     </div>
     <div class="mb-10 d-flex mb-5 flex-jc-center">
@@ -41,14 +43,17 @@
         <i class="chevron up icon"></i>
       </span>
     </div>
-    <div class="fs-1-5 font-w-bold d-flex mb-10 text-center org-info" *ngIf=" orgDetails && orgDetails.orgName">{{orgDetails.orgName}}   
+    <div class="fs-1-5 font-w-bold d-flex mb-10 text-center org-info" *ngIf=" orgDetails && orgDetails.orgName">
+      {{orgDetails.orgName}}
       <div class="computer only">
-          <i suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}" [popupInverted]="true" [popupPlacement]="'bottom left'" class="info"></i>
+        <i suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}" [popupInverted]="true"
+          [popupPlacement]="'bottom left'" class="info"></i>
       </div>
       <div class="mobile only">
-          <i suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}" [popupInverted]="true" [popupPlacement]="'bottom right'" class="info"></i>
+        <i suiPopup popupText="{{resourceService.frmelmnts.lbl.stateRecord}}" [popupInverted]="true"
+          [popupPlacement]="'bottom right'" class="info"></i>
       </div>
-      
+
     </div>
 
     <!-- add state and district -->
@@ -218,7 +223,7 @@
         <div class="ui segment">
           <div class="regular slider pt-10">
             <app-page-section [section]="{ contents: contributions}" (visits)="prepareVisits($event)"
-              (playEvent)="openContent($event)" [slug]= "slug"></app-page-section>
+              (playEvent)="openContent($event)" [slug]="slug"></app-page-section>
           </div>
         </div>
       </div>
@@ -226,40 +231,42 @@
       <!--contributions view ends-->
       <!-- tarainings attended computer view strats-->
       <div class="container my-16 sb-certificate-trained" *ngIf="attendedTraining && attendedTraining.length">
-          <div class="d-flex flex-ai-center sb-ct-list list-heading">
-            <label
-              class="mb-0">{{resourceService.frmelmnts.lbl.trainingAttended}}({{attendedTraining.length}})&#x200E;</label>
-          </div>
-          <div class="list-item-parent" *ngFor="let data of attendedTraining | slice:0:courseLimit">
-            <div class="d-flex flex-ai-center sb-ct-list list-item" *ngIf="data.courseName">
-              <label class="mr-auto mb-0">{{data.courseName}}</label>
-              <span class="list-date mr-24" *ngIf="data.completedOn">{{data.completedOn | date :'MMMM yyy' }}</span>
-              <button appTelemetryInteract
-              [telemetryInteractObject]="telemetryInteractObject" [telemetryInteractEdata]="downloadCertificateEData" 
-              [telemetryInteractCdata]="[{id: 'course:download:cert', type: 'Feature'},{id: 'SB-14120', type: 'Task'}]" 
-              class="sb-btn sb-btn-normal sb-btn-link sb-btn-link-primary sb-left-icon-btn" *ngIf="data.certificates && data.certificates.length > 0" (click)="downloadCert(data.certificates)">
-              <i class="download icon" ></i>{{resourceService?.frmelmnts?.btn?.downloadCertificate}}</button>
-              <div class="sb-certificate-trained-line d-flex flex-ai-center flex-jc-center" *ngIf="!data.certificates || (data.certificates && data.certificates.length === 0)">
-                  <span class="bar"></span>
-                  <span class="bar"></span>
-                </div>
+        <div class="d-flex flex-ai-center sb-ct-list list-heading">
+          <label
+            class="mb-0">{{resourceService.frmelmnts.lbl.trainingAttended}}({{attendedTraining.length}})&#x200E;</label>
+        </div>
+        <div class="list-item-parent" *ngFor="let data of attendedTraining | slice:0:courseLimit">
+          <div class="d-flex flex-ai-center sb-ct-list list-item" *ngIf="data.courseName">
+            <label class="mr-auto mb-0">{{data.courseName}}</label>
+            <span class="list-date mr-24" *ngIf="data.completedOn">{{data.completedOn | date :'MMMM yyy' }}</span>
+            <button appTelemetryInteract [telemetryInteractObject]="telemetryInteractObject"
+              [telemetryInteractEdata]="downloadCertificateEData"
+              [telemetryInteractCdata]="[{id: 'course:download:cert', type: 'Feature'},{id: 'SB-14120', type: 'Task'}]"
+              class="sb-btn sb-btn-normal sb-btn-link sb-btn-link-primary sb-left-icon-btn"
+              *ngIf="data.certificates && data.certificates.length > 0" (click)="downloadCert(data.certificates)">
+              <i class="download icon"></i>{{resourceService?.frmelmnts?.btn?.downloadCertificate}}</button>
+            <div class="sb-certificate-trained-line d-flex flex-ai-center flex-jc-center"
+              *ngIf="!data.certificates || (data.certificates && data.certificates.length === 0)">
+              <span class="bar"></span>
+              <span class="bar"></span>
             </div>
           </div>
-          <div class="d-flex flex-ai-center flex-jc-center sb-ct-list list-item" *ngIf="attendedTraining.length > 3">
-            <button class="sb-btn sb-btn-normal sb-btn-primary sb-right-icon-btn" appTelemetryInteract
-              [telemetryInteractObject]="telemetryInteractObject"
-              [telemetryInteractEdata]="{id:'view-more' , type:'click' , pageid:'profile-read'}" *ngIf="showMoreTrainings"
-              (click)="toggleCourse(true)">{{resourceService.frmelmnts.lbl.viewmore}}<i
-                class="chevron down icon"></i></button>
-            <button class="sb-btn sb-btn-normal sb-btn-primary sb-right-icon-btn" appTelemetryInteract
-              [telemetryInteractObject]="telemetryInteractObject"
-              [telemetryInteractEdata]="{id:'view-less' , type:'click' , pageid:'profile-read'}"
-              (click)="toggleCourse(false)" *ngIf="!showMoreTrainings">{{resourceService.frmelmnts.lbl.viewless}}<i
-                class="chevron up icon"></i></button>
-          </div>
+        </div>
+        <div class="d-flex flex-ai-center flex-jc-center sb-ct-list list-item" *ngIf="attendedTraining.length > 3">
+          <button class="sb-btn sb-btn-normal sb-btn-primary sb-right-icon-btn" appTelemetryInteract
+            [telemetryInteractObject]="telemetryInteractObject"
+            [telemetryInteractEdata]="{id:'view-more' , type:'click' , pageid:'profile-read'}" *ngIf="showMoreTrainings"
+            (click)="toggleCourse(true)">{{resourceService.frmelmnts.lbl.viewmore}}<i
+              class="chevron down icon"></i></button>
+          <button class="sb-btn sb-btn-normal sb-btn-primary sb-right-icon-btn" appTelemetryInteract
+            [telemetryInteractObject]="telemetryInteractObject"
+            [telemetryInteractEdata]="{id:'view-less' , type:'click' , pageid:'profile-read'}"
+            (click)="toggleCourse(false)" *ngIf="!showMoreTrainings">{{resourceService.frmelmnts.lbl.viewless}}<i
+              class="chevron up icon"></i></button>
         </div>
       </div>
-      <!-- tarainings attended computer view ends-->
+    </div>
+    <!-- tarainings attended computer view ends-->
   </div>
 </div>
 
@@ -268,11 +275,12 @@
   <section class="pt-30 pb-30 d-flex flex-ai-center flex-dc">
     <div class="ui container">
       <div class="mb-15 d-flex flex-jc-center relative">
-        <ngx-avatar class="my-avatar" [style]="customStyle" [size]="90" initialsSize="1" [textSizeRatio]="2" name="{{userProfile.firstName}} ">
+        <ngx-avatar class="my-avatar" [style]="customStyle" [size]="90" initialsSize="1" [textSizeRatio]="2"
+          name="{{userProfile.firstName}} ">
         </ngx-avatar>
       </div>
     </div>
-    <div class="fs-2-5 font-w-bold mb-15 text-ac">{{userProfile.firstName | titlecase}} {{userProfile.lastName |
+    <div class="username fs-2-5 font-w-bold mb-15 text-ac">{{userProfile.firstName | titlecase}} {{userProfile.lastName |
       titlecase}}</div>
     <div class="fs-1-5 font-w-bold mb-10 text-ac" *ngIf=" orgDetails && orgDetails.orgName">{{orgDetails.orgName}}</div>
     <div class="m-0 pl-0 computer only" *ngIf=" orgDetails && orgDetails.locations">
@@ -280,7 +288,8 @@
         <div class="fs-1-16">{{resourceService.frmelmnts.lbl.block}} :</div>
         <div class="fs-1-16 font-w-bold ml-5">{{getLocationDetails(orgDetails.locations, 'block')}}</div>
       </div>
-      <div class="mb-0 d-flex flex-jc-center" *ngIf="getLocationDetails(orgDetails.locations, 'district') && getLocationDetails(orgDetails.locations, 'state') ">
+      <div class="mb-0 d-flex flex-jc-center"
+        *ngIf="getLocationDetails(orgDetails.locations, 'district') && getLocationDetails(orgDetails.locations, 'state') ">
         <div class="fs-1-16">{{resourceService.frmelmnts.lbl.district}} :</div>
         <div class="fs-1-16 font-w-bold ml-5">{{getLocationDetails(orgDetails.locations, 'district')}},
           {{getLocationDetails(orgDetails.locations, 'state')}}</div>
@@ -291,7 +300,8 @@
         <span class="fs-1-16 min-w-90 text-ac ">{{resourceService.frmelmnts.lbl.block}} :</span>
         <span class="fs-1-16 font-w-bold text-ac">{{getLocationDetails(orgDetails.locations, 'block')}}</span>
       </div>
-      <div class="mb-0 d-flex  m-responsive-flex-dc mt-15" *ngIf="getLocationDetails(orgDetails.locations, 'district') && getLocationDetails(orgDetails.locations, 'state') ">
+      <div class="mb-0 d-flex  m-responsive-flex-dc mt-15"
+        *ngIf="getLocationDetails(orgDetails.locations, 'district') && getLocationDetails(orgDetails.locations, 'state') ">
         <span class="fs-1-16 min-w-90 text-ac">{{resourceService.frmelmnts.lbl.district}} :</span>
         <span class="fs-1-16 font-w-bold text-ac">{{getLocationDetails(orgDetails.locations, 'district')}},
           {{getLocationDetails(orgDetails.locations, 'state')}}</span>
@@ -299,45 +309,56 @@
     </div>
   </section>
 
-<section>
+  <section>
     <div class="container mt-5 mb-30">
-        <div class="card">
-            <div class="card-header text-center text-light" style="background: #585858;">
-                <div class="row mt-15">
-                 <div class="ml-15">
-                   <h4>User Information</h4>
-                 </div>
-                </div>
+      <div class="card">
+        <div class="card-header text-center text-light" style="background: #865BA0;">
+          <div class="row mt-15">
+            <div class="ml-15">
+              <h4>User Information</h4>
             </div>
-            <div class="card-body">
-              <p class=""> <span style="font-weight: bold;">First Name: &nbsp;</span> <span> {{userProfile.firstName | titlecase}} {{userProfile.lastName |
+          </div>
+        </div>
+        <div class="card-body">
+          <p class=""> <span style="font-weight: bold;">First Name: &nbsp;</span> <span>
+              {{userProfile.firstName | titlecase}} {{userProfile.lastName |
                   titlecase}}</span></p>
-              <p class=""><span style="font-weight: bold;">User Name: &nbsp;</span> <span> {{userProfile.userName}}</span></p>
-              <p class="" *ngIf="userProfile.email"><span style="font-weight: bold;">Email: &nbsp; </span><span>{{userProfile.email}}</span></p>
-              <p class="" *ngIf="userProfile.phone"><span style="font-weight: bold;">Phone No: &nbsp;</span><span>+91 {{userProfile.phone}}</span> </p>
-              <p class="" *ngIf="roles && roles.length > 0" > 
-                <span> Roles: &nbsp;</span>
-                      <span class="ui dodger-blue basic label" *ngFor="let role of roles | slice:0:showMoreRolesLimit">{{role}}</span>
-                     <span *ngIf="roles.length > defaultShowMoreRolesLimit" class="fs-1 color-2 mb-10 font-w-bold cursor-pointer">
-                  <span tabindex="0" *ngIf="showMoreRoles" (click)="toggle(true)">+ {{roles.length -
+          <p class=""><span style="font-weight: bold;">User Name: &nbsp;</span> <span> {{userProfile.userName}}</span>
+          </p>
+          <p class="" *ngIf="userProfile.email"><span style="font-weight: bold;">Email: &nbsp;
+            </span><span>{{userProfile.email}}</span>
+            <app-editemail></app-editemail>
+          </p>
+          <p class="" *ngIf="userProfile.phone"><span style="font-weight: bold;">Phone No: &nbsp;</span><span>+91
+              {{userProfile.phone}}</span>
+
+          </p>
+          <p class="" *ngIf="roles && roles.length > 0">
+            <span> Roles: &nbsp;</span>
+            <span class="ui dodger-blue basic label"
+              *ngFor="let role of roles | slice:0:showMoreRolesLimit">{{role}}</span>
+            <span *ngIf="roles.length > defaultShowMoreRolesLimit"
+              class="fs-1 color-2 mb-10 font-w-bold cursor-pointer">
+              <span tabindex="0" *ngIf="showMoreRoles" (click)="toggle(true)">+ {{roles.length -
                     defaultShowMoreRolesLimit}} {{resourceService.frmelmnts.lbl.more}}
-                    <i class="chevron down icon"></i>
-                  </span>
-                  <span (click)="toggle(false)" *ngIf="!showMoreRoles">{{resourceService.frmelmnts.lbl.showLess}}
-                    <i class="chevron up icon"></i>
-                  </span>
-                     </span>
-                    </p>
-            </div>
+                <i class="chevron down icon"></i>
+              </span>
+              <span (click)="toggle(false)" *ngIf="!showMoreRoles">{{resourceService.frmelmnts.lbl.showLess}}
+                <i class="chevron up icon"></i>
+              </span>
+            </span>
+          </p>
         </div>
       </div>
-</section>
+    </div>
+  </section>
 
   <!-- my badges section starts -->
-  <extension-point *ngIf="userProfile.badgeAssertions && userProfile.badgeAssertions.length > 0" [name]="'profile-widget'"></extension-point>
+  <extension-point *ngIf="userProfile.badgeAssertions && userProfile.badgeAssertions.length > 0"
+    [name]="'profile-widget'"></extension-point>
   <!-- my badges section ends -->
 
- 
+
   <div class="profile-bg-c-2 pt-30">
     <div class="ui container">
       <!--contributions view starts-->
@@ -354,7 +375,7 @@
         <div class="ui segment">
           <div class="regular slider pt-10">
             <app-page-section [section]="{ contents: contributions}" (visits)="prepareVisits($event)"
-              (playEvent)="openContent($event)" [slug]= "slug"></app-page-section>
+              (playEvent)="openContent($event)" [slug]="slug"></app-page-section>
           </div>
         </div>
       </div>
@@ -410,10 +431,12 @@
         <span class="fs-1 color-4" *ngIf="data.completedOn">{{data.completedOn | date :'MMMM yyy'}}</span>
       </li>
       <div class=" mb-15 d-flex flex-jc-center relative" *ngIf="attendedTraining.length > 3">
-        <button class="ui semi-circular dodger-blue button center-aligned" *ngIf="showMoreTrainings" (click)="toggleCourse(true)">{{resourceService.frmelmnts.lbl.viewmore}}
+        <button class="ui semi-circular dodger-blue button center-aligned" *ngIf="showMoreTrainings"
+          (click)="toggleCourse(true)">{{resourceService.frmelmnts.lbl.viewmore}}
           <i class="chevron down icon pl-10"></i>
         </button>
-        <button class="ui semi-circular dodger-blue button center-aligned" (click)="toggleCourse(false)" *ngIf="!showMoreTrainings">{{resourceService.frmelmnts.lbl.viewless}}
+        <button class="ui semi-circular dodger-blue button center-aligned" (click)="toggleCourse(false)"
+          *ngIf="!showMoreTrainings">{{resourceService.frmelmnts.lbl.viewless}}
           <i class="chevron up icon pl-10"></i>
         </button>
       </div>

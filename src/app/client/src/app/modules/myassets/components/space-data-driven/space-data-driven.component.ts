@@ -184,20 +184,20 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
           this.userProfile = user.userProfile;
         }
       });
-      /*telemetry implementation for space*/
-     this.telemetryImpression = {
-       context: {
-         env: 'assetcreate'
-       },
-       edata: {
+    /*telemetry implementation for space*/
+    this.telemetryImpression = {
+      context: {
+        env: 'assetcreate'
+      },
+      edata: {
         type: 'view',
         pageid: 'asset-creation-page',
         uri: this.router.url,
         subtype: 'paginate',
         duration: this.navigationHelperService.getPageLoadTime()
-       }
-     };
-     /*telemetry implementation for space*/
+      }
+    };
+    /*telemetry implementation for space*/
   }
   ngOnDestroy() {
     if (this.modal && this.modal.deny) {
@@ -291,19 +291,21 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
     this.showLoader = true;
     const requestData = _.cloneDeep(data);
     console.log('request data from asset creation = ', requestData);
-  //  data.submittedBy = requestData.creator;
-   // data.creators = requestData.creators;
-   // data.source = requestData.link;
-      requestData.name = data.name ? data.name : this.name,
+    //  data.submittedBy = requestData.creator;
+    // data.creators = requestData.creators;
+    // data.source = requestData.link;
+    requestData.name = data.name ? data.name : this.name,
       requestData.assetformat = data.assetformat ? data.assetformat : null;
-      requestData.licensetype = data.licensetype ? data.licensetype : null ;
-      requestData.description = data.description ? data.description : this.description,
+    requestData.licensetype = data.licensetype ? data.licensetype : null;
+    requestData.description = data.description ? data.description : this.description,
       requestData.createdBy = this.userProfile.id,
       requestData.createdFor = this.userProfile.organisationIds,
-       requestData.contentType = this.configService.appConfig.contentCreateTypeForEditors[this.contentType],
-       requestData.framework = this.framework;
-  //  requestData.region = [data.region];
-    requestData.version = '' + parseFloat(requestData.version);
+      requestData.contentType = this.configService.appConfig.contentCreateTypeForEditors[this.contentType],
+      requestData.framework = this.framework;
+    //  requestData.region = [data.region];
+    // requestData.version = '' + parseFloat(requestData.version);
+    requestData.version = parseFloat(requestData.version);
+
     requestData.organisation = this.userProfile.organisationNames;
 
     if (!!data.link && this.uploadLink === 'link') {
@@ -317,10 +319,10 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
     } else if (!!data.mimeType) {
       requestData.mimeType = data.mimeType;
     }
-     if (this.resourceType) {
-       requestData.resourceType = this.resourceType;
-     }
-     if (!_.isEmpty(this.userProfile.lastName)) {
+    if (this.resourceType) {
+      requestData.resourceType = this.resourceType;
+    }
+    if (!_.isEmpty(this.userProfile.lastName)) {
       requestData.creator = this.userProfile.firstName + ' ' + this.userProfile.lastName;
     } else {
       requestData.creator = this.userProfile.firstName;
@@ -331,7 +333,6 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
     } else {
       requestData.submittedBy = this.userProfile.firstName;
     }
-
     delete requestData.board;
     // delete requestData.creators;
     delete requestData.gradeLevel;
@@ -349,7 +350,7 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
   isDisabled(event) {
     console.log('event', event);
     this.uploadLink = event.target.value;
-    if (event.target.value === 'uploadContent') {
+    if (event.target.value === 'uploadFile') {
       this.uploadContent = true;
     } else {
       this.enabled = !this.enabled;
@@ -360,93 +361,103 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
     this.formData.formInputData['link'] = this.link;
     this.formData.formInputData['assetformat'] = this.formData.assetformat;
     this.formData.formInputData['licensetype'] = this.formData.licensetype;
-     const data = _.pickBy(this.formData.formInputData);
-    console.log('data in checking fields = ', data);
-    if (!!data.name && !!data.assetformat && !!data.licensetype && !!data.description &&
-      !!data.board && (!!data.keywords && data.keywords.length > 0)
-      && !!data.creators && !!data.version
-      && !!data.year && !!data.region && (!!data.languages && data.languages.length > 0)) {
+    const data = _.pickBy(this.formData.formInputData);
+    // console.log('data in checking fields = ', data);
+    // if (!!data.name && !!data.assetformat && !!data.licensetype && !!data.description &&
+    //   !!data.board && (!!data.keywords && data.keywords.length > 0)
+    //   && !!data.creators && !!data.version
+    //   && !!data.year && !!data.region && (!!data.languages && data.languages.length > 0)) {
+    if (!!data.name && !!data.description && (!!data.keywords && data.keywords.length > 0 && !this.uploadContent)
+    ) {
       this.uploadSuccess = true;
       this.uploadbtnStatus = true;
       this.createContent();
-     // this.createContent(data);
+      // this.createContent(data);
+    } else if (!!data.name && !!data.description && (!!data.keywords && data.keywords.length > 0  && 
+      !!data.assetformat && !!data.licensetype && !!data.board && !!data.creators && !!data.version 
+      && (!!data.languages && data.languages.length > 0) &&
+      this.uploadContent)) {
+
+      this.uploadSuccess = true;
+      this.uploadbtnStatus = true;
+      this.createContent();
     } else {
       this.toasterService.error('Asset creation failed please provide required fields');
     }
   }
- /* createContent(data) {
-
-    const requestData = {
-      asset: this.generateData(_.pickBy(this.formData.formInputData))
-    };
-    requestData.asset.assetType = data.board;
-    if (data.gradeLevel !== undefined) {
-    requestData.asset.sector = data.gradeLevel[0];
-    }
-    requestData.asset.language = data.languages;
-    requestData.asset.artifactUrl = data.link;
-    requestData.asset.creator = data.creator;
-    requestData.asset.source = data.link;
-    requestData.asset.lastSubmittedOn = data.lastSubmittedOn;
-    requestData.asset.resourceType = 'Learn';
-    requestData.asset.contentType = 'Resource';
-
-    console.log('request param = ', requestData, data.gradeLevel);
-    if (this.contentType === 'studymaterial' && this.uploadSuccess === true) {
-      this.workSpaceService.createAsset(requestData).subscribe(res => {
-        console.log('after creating asset res = ', res);
-        localStorage.setItem(res.result.node_id, JSON.stringify('Review'));
-        localStorage.setItem('creator', JSON.stringify(this.userService.userid));
-        const state = JSON.parse(localStorage.getItem(res.result.node_id));
-        const creatorId = JSON.parse(localStorage.getItem(res.result.node_id));
-        console.log('state = ', state, 'creator id = ', creatorId);
-
-        this.contentId = res.result.node_id;
-        if (this.uploadLink === 'uploadFile') {
-          this.updateAssetStatus(res.result.node_id, 'file');
-          this.toasterService.info('Redirected to upload File Page');
-          this.routetoediter();
-        } else if (this.uploadLink === 'uploadContent') {
-          this.toasterService.success('Asset created successfully');
-          this.routeToContentEditor({ identifier: res.result.node_id });
-        } else {
-          this.updateAssetStatus(res.result.node_id, 'asset');
-          this.toasterService.success('Asset created successfully');
-          this.goToCreate();
-        }
-      }, err => {
-        this.toasterService.error('Asset creation failed please check the required fields.');
-      });
-    } else {
-      this.toasterService.error('Asset creation failed');
-    }
-    // this.goToCreate();
-  }
-  updateAssetStatus(assetId, state) {
-    let assetStatus;
-    if (state === 'file') {
-      assetStatus = 'Review';
-    } else {
-      assetStatus = 'Draft';
-    }
-    const option = {
-      asset: {
-        identifier: assetId,
-        status: assetStatus
-      }
-    };
-    console.log('updating asset status');
- this.workSpaceService.updateAsset(option).subscribe(
-  (data: ServerResponse) => {
-    this.showLoader = false;
-    this.toasterService.success('Asset status updated ');
-  },
-  (err: ServerResponse) => {
-    this.showLoader = false;
-    this.toasterService.error(this.resourceService.messages.fmsg.m0022);
-  }
-);
-  } */
+  /* createContent(data) {
+ 
+     const requestData = {
+       asset: this.generateData(_.pickBy(this.formData.formInputData))
+     };
+     requestData.asset.assetType = data.board;
+     if (data.gradeLevel !== undefined) {
+     requestData.asset.sector = data.gradeLevel[0];
+     }
+     requestData.asset.language = data.languages;
+     requestData.asset.artifactUrl = data.link;
+     requestData.asset.creator = data.creator;
+     requestData.asset.source = data.link;
+     requestData.asset.lastSubmittedOn = data.lastSubmittedOn;
+     requestData.asset.resourceType = 'Learn';
+     requestData.asset.contentType = 'Resource';
+ 
+     console.log('request param = ', requestData, data.gradeLevel);
+     if (this.contentType === 'studymaterial' && this.uploadSuccess === true) {
+       this.workSpaceService.createAsset(requestData).subscribe(res => {
+         console.log('after creating asset res = ', res);
+         localStorage.setItem(res.result.node_id, JSON.stringify('Review'));
+         localStorage.setItem('creator', JSON.stringify(this.userService.userid));
+         const state = JSON.parse(localStorage.getItem(res.result.node_id));
+         const creatorId = JSON.parse(localStorage.getItem(res.result.node_id));
+         console.log('state = ', state, 'creator id = ', creatorId);
+ 
+         this.contentId = res.result.node_id;
+         if (this.uploadLink === 'uploadFile') {
+           this.updateAssetStatus(res.result.node_id, 'file');
+           this.toasterService.info('Redirected to upload File Page');
+           this.routetoediter();
+         } else if (this.uploadLink === 'uploadContent') {
+           this.toasterService.success('Asset created successfully');
+           this.routeToContentEditor({ identifier: res.result.node_id });
+         } else {
+           this.updateAssetStatus(res.result.node_id, 'asset');
+           this.toasterService.success('Asset created successfully');
+           this.goToCreate();
+         }
+       }, err => {
+         this.toasterService.error('Asset creation failed please check the required fields.');
+       });
+     } else {
+       this.toasterService.error('Asset creation failed');
+     }
+     // this.goToCreate();
+   }
+   updateAssetStatus(assetId, state) {
+     let assetStatus;
+     if (state === 'file') {
+       assetStatus = 'Review';
+     } else {
+       assetStatus = 'Draft';
+     }
+     const option = {
+       asset: {
+         identifier: assetId,
+         status: assetStatus
+       }
+     };
+     console.log('updating asset status');
+  this.workSpaceService.updateAsset(option).subscribe(
+   (data: ServerResponse) => {
+     this.showLoader = false;
+     this.toasterService.success('Asset status updated ');
+   },
+   (err: ServerResponse) => {
+     this.showLoader = false;
+     this.toasterService.error(this.resourceService.messages.fmsg.m0022);
+   }
+ );
+   } */
 
   createContent() {
 
@@ -457,7 +468,7 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
     if (this.contentType === 'studymaterial' && this.uploadSuccess === true) {
       this.editorService.create(requestData).subscribe(res => {
 
-       // localStorage.setItem(res.result.content_id, JSON.stringify('Review'));
+        // localStorage.setItem(res.result.content_id, JSON.stringify('Review'));
         localStorage.setItem('creator', JSON.stringify(this.userService.userid));
         const state = JSON.parse(localStorage.getItem(res.result.content_id));
         const creatorId = JSON.parse(localStorage.getItem(res.result.content_id));
@@ -520,20 +531,20 @@ export class SpaceDataDrivenComponent extends MyAsset implements OnInit, OnDestr
       this.router.navigate(['myassets/create/edit/generic', this.contentId, this.status, 'Draft']);
     }, 1800);
   }
-/*telemetry implementation for space, function for calling interact event on successful asset craeion*/
+  /*telemetry implementation for space, function for calling interact event on successful asset craeion*/
   callInteractEvent() {
-   const interactEdata: IInteractEventInput = {
-     context: {
-       env: 'asset-create',
-       cdata: []
-     },
-     edata: {
-       id: 'save-asset-btn',
-       type: 'click',
-       subtype: 'new asset created',
-       pageid: 'asset-creation-page'
-     }
-   };
-  this.telemetryService.interact(interactEdata);
+    const interactEdata: IInteractEventInput = {
+      context: {
+        env: 'asset-create',
+        cdata: []
+      },
+      edata: {
+        id: 'save-asset-btn',
+        type: 'click',
+        subtype: 'new asset created',
+        pageid: 'asset-creation-page'
+      }
+    };
+    this.telemetryService.interact(interactEdata);
   }
 }

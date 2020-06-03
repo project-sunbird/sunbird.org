@@ -7,6 +7,7 @@ _ = require('lodash'),
 path = require('path'),
 envHelper = require('../helpers/environmentVariablesHelper.js'),
 tenantHelper = require('../helpers/tenantHelper.js'),
+ sessionstorage = require('sessionstorage');
 defaultTenantIndexStatus = tenantHelper.getDefaultTenantIndexState(),
 oneDayMS = 86400000,
 pathMap = {}
@@ -172,6 +173,7 @@ const renderDefaultIndexPage = (req, res) => {
 const renderTenantPage = (req, res) => {
   const tenantName = _.lowerCase(req.params.tenantName) || envHelper.DEFAULT_CHANNEL
   if(req.query.cdnFailed === 'true') {
+
     loadTenantFromLocal(req, res)
     return;
   }
@@ -190,6 +192,9 @@ const renderTenantPage = (req, res) => {
 // in fallback option check always for local tenant folder and redirect to / if not exists
 const loadTenantFromLocal = (req, res) => {
   const tenantName = _.lowerCase(req.params.tenantName) || envHelper.DEFAULT_CHANNEL
+  if(tenantName != undefined && tenantName != 'favicon ico'){
+    sessionstorage.setItem('tenant',tenantName);
+  }
   if (tenantName && fs.existsSync(path.join(__dirname, './../tenant', tenantName, 'index.html'))) {
     res.sendFile(path.join(__dirname, './../tenant', tenantName, 'index.html'))
   } else {

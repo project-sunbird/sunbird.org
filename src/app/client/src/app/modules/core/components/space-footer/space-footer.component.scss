@@ -54,7 +54,8 @@ font-family: 'Muli', sans-serif;
     height: 44px !important;
 }
 .text{
-    font-family:'Muli' !important; 
+    font-family:'MontserratRegular_2' !important; 
+    font-weight: 400 !important;
     color: black;
   }
 hr{
@@ -68,7 +69,7 @@ hr{
 }
 .footer__title {
     font-family: "Muli",serif;
-    color: #707070;
+    color: black;
     margin-bottom: 15px;
     font-size: 20px;
     line-height: 1.2em;
@@ -85,12 +86,13 @@ a:hover, a:active {
 }
 .ft-1 a {
     text-decoration: none;
-    font-size: 15.6px !important;
-    color: #707070 !important;
+    font-size: 1.3em !important;
+    font-family: 'MontserratRegular_2';
+    color: black !important;
     cursor: pointer;
 }
 .footer__right__content {
-    color: #bababa;
+    color: black;
     font-weight: 400;
     margin-bottom: 15px;
     font-size: 13px;
@@ -98,6 +100,9 @@ a:hover, a:active {
 }
 
 @media screen and (min-width:312px ) and (max-width: 424px) {
+    .justify-center {
+        justify-content: center;
+    }
 .footer1 {
     margin-top: 1rem !important;
     width: 92vw;
@@ -108,6 +113,9 @@ a:hover, a:active {
 }
 }
 @media screen and(min-width: 425px ) and (max-width:767px) {
+    .justify-center {
+        justify-content: center;
+    }
     .footer1 {
         margin-top: -4rem !important;
         width: 97vw !important;

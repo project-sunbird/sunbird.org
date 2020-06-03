@@ -4,21 +4,21 @@
 <div class="ui menu bs-0 main-header d-block">
   <div class="ui primary-header p-10">
     <div role="banner" class="ui logo d-flex flex-ai-center row">
-      <div class="ml-10">
+      <div style="width: 37%;" class="ml-10">
         <a class="flex-ai-center cursor-pointer" (click)="navigateToHome()">
-          <img class="image centered  ml-10" alt={{tenantName}} src="../../../../../assets/images/space_logo.png">
+          <img class="image centered  ml-10" alt={{tenantName}} src="../../../../../assets/images/spacelogonew.png">
         </a>
       </div>
       <div class="" *ngIf="slug !=='space'">
         <app-main-menu class="d-flex computer only ml-auto" [slugInfo]="slug"></app-main-menu>
       </div>
-      <i class="large bars icon link primary-color mobile only" *ngIf="slug ==='space' && userService.loggedIn"
-        (click)="showSideBar()" tabindex="0"></i>
-      <div class="col-6 computer only" *ngIf="slug ==='space' && userService.loggedIn">
+      <!-- <i class="large bars icon link primary-color mobile only" *ngIf="slug ==='space' && userService.loggedIn"
+        (click)="showSideBar()" tabindex="0"></i> -->
+      <div style="width: 25%;" class="computer only" *ngIf="slug ==='space' && userService.loggedIn">
         <app-space-main-menu class="d-flex  ml-auto justify-content-center" [slugInfo]="slug"></app-space-main-menu>
       </div>
-      <div class="" *ngIf="userService.loggedIn">
-        <a class="profile-avtar item  pr-0">
+      <div style="width: 35%;" class="profiledropdown" *ngIf="userService.loggedIn">
+        <a style="float: right;" class="computer only profile-avtar item  pr-0">
           <a class="items mr-20">
             <!-- <img src="{{'assets/images/notification.png'}}" class="notification-icon"> -->
             <i class="fas fa-bell " style="width: 34.8px;"
@@ -108,6 +108,8 @@
             </div>
           </div>
         </a>
+        <i style="float: right;" class="large bars icon link primary-color mobile only" *ngIf="slug ==='space' && userService.loggedIn"
+        (click)="showSideBar()" tabindex="0"></i>
       </div>
 
       <div class="col" *ngIf="!userService.loggedIn">
@@ -116,7 +118,7 @@
             tabindex="0"></i>
         </div>
         <div class="col computer only">
-          <div class="primary-nav-item d-flex ml-auto pr-30 col-lg-9">
+          <div class="primary-nav-item d-flex  pr-30 col-lg-9">
 
             <a (click)="gotoContact('about')" class="item" id="a">About</a>
             <a (click)="gotoContact('assets')" class="item" id="a">Assets</a>
@@ -153,7 +155,7 @@
     </div>
   </div>
 </div>
-<div class="navbar-bg p-20 navbar-padding" *ngIf="userService.loggedIn" style="background-color:#BABABA">
+<div class="navbar-bg p-20 navbar-padding" *ngIf="userService.loggedIn" style="background-color:#865BA0">
   <div class="ui mobile-view container d-flex flex-ai-center mx-0 fz">
 
     <div class="row">

@@ -59,14 +59,14 @@
         </span>
       </p>
       <p class="card-text" *ngIf="assetDetail?.description">Description : {{assetDetail?.description}}</p>
-      <p class="card-text" *ngIf="assetDetail?.source && assetDetail?.mimeType === 'text/x-url'">Link: <a
+      <p class="card-text" *ngIf="assetDetail?.source && assetDetail?.mimeType === 'text/x-url'">Link: <a class="text-purple"
           href="{{assetDetail?.link}}" target="_blank">{{assetDetail?.link}} </a></p>
       <p class="card-text">Submitted By : {{ assetDetail?.creator }}@{{ assetDetail?.creators }}</p>
       <p class="card-text" *ngIf="assetDetail?.lastSubmittedOn">Submitted Date :
         {{assetDetail?.lastSubmittedOn | dateFormat}}</p>
       <div *ngIf="assetDetail?.artifactUrl && assetDetail?.mimeType === 'application/pdf'">
         <p>
-          File : <span (click)="navigateToPlayer()" class="pdfStyle">{{pdfs | titlecase  | slice: 1}}pdf</span>
+          File : <span (click)="navigateToPlayer()" class="pdfStyle text-purple">{{pdfs | titlecase  | slice: 1}}pdf</span>
         </p>
 
       </div>

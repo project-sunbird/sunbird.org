@@ -18,7 +18,7 @@
   }
     
   .card-header {
-    background: #585858
+    background: #865BA0
   }
   .fa {
       font-size: 30px;
@@ -26,6 +26,8 @@
   span {
     display: -webkit-inline-box;
     list-style: none;
+    font-family: 'MontserratRegular_2' !important;
+    font-weight: 400 !important;
   }
   h5 {
     padding-top: 0.5rem;
@@ -39,9 +41,14 @@
 }
 .card {
  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
- font-family: 'Muli', sans-serif;
+ font-family: 'CampaignMedium';
 }
-
+.card-body {
+  font-family: 'MontserratRegular_2' !important;
+  p {
+    font-size: 15px;
+  }
+}
 #stylefav {
   border-radius: 50%;
   background: gainsboro;
@@ -57,4 +64,11 @@
  .pdfStyle {
   cursor: pointer;
   color: #6e71c3
+}
+.keywords-list-section {
+  word-wrap:break-word;
+  margin-bottom: 1rem;
+  p.keyword-name {
+    display: inline;
+  }
 }

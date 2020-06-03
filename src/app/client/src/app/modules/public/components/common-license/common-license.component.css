@@ -5,7 +5,7 @@
     border: 0;
     border-color: transparent;
     padding: 0 !important;
-    /* background-image: url('../../../../../assets/images/banner_bg.jpg'); */
+    /* background-image: url('../../../../../assets/images/spacebannernew.jpg'); */
   }
 
   .caption {
@@ -22,18 +22,27 @@
     margin: auto;
     display: block;
     font-size: 17px;
-    font-family: 'Muli', sans-serif;
     line-height: 2em;
+    font-family: 'MontserratRegular_2';
+    font-weight: 400 !important;
+  }
+  .text-ac {
+    font-family: 'CampaignMedium';
+    color: white;
+    /* font-weight: bold; */
   }
   ol li {
     line-height: 2em;
     font-family: 'Muli', sans-serif;
     font-size: 17px;
   }
+  .jumbotron {
+    background-color: #686365;
+  }
   .cimage{
-    background-image: url('../../../../../assets/images/slide-04.png');
+    background-image: url('../../../../../assets/space/GrievanceRedressalProcessBanner.png');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-position: center;
   }
   @media screen and (max-width:820px ) and (min-width: 312px) {
     .text{

@@ -1,0 +1,4 @@
+<span class="editemailid" (click)="editEmail()"><i class="fas fa-edit"></i></span>
+
+<app-update-contact-details [spaceeditemail]="true" *ngIf="showContactPopup"
+  (close)="showContactPopup = !showContactPopup" [contactType]="contactType"></app-update-contact-details>

@@ -42,3 +42,14 @@
   font-weight: bold !important;
 }
 
+h5 {
+  font-family: 'CampaignMedium' !important;
+ // font-weight: 500;
+ font-weight: 500 !important;
+}
+
+.flex-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

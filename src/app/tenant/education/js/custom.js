@@ -1,3 +1,4 @@
+localStorage.setItem("tenant","education");
 window.sr = ScrollReveal();
 sr.reveal('.foo');
 sr.reveal('.bar');

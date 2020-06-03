@@ -116,7 +116,7 @@ export class ExploreContentComponent implements OnInit, OnDestroy, AfterViewInit
     }
     private fetchContents() {
         let option;
-        if (this.slug === 'sbwb' || this.slug === 'education') {
+        if (this.slug !== 'sunbirdorg' && this.slug !== 'space') {
             console.log('slug if');
             let filters = _.pickBy(this.queryParams, (value: Array<string> | string) => value && value.length);
             filters = _.omit(filters, ['key', 'sort_by', 'sortType', 'appliedFilters']);

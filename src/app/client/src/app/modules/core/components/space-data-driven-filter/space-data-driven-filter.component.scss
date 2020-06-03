@@ -16,17 +16,34 @@
     font-family: 'Muli', sans-serif;
 
 }
-
+.closebtn {
+    background-color: white !important;
+      color: rgb(133, 90, 159)!important;
+      border: 1px solid rgb(133, 90, 159);
+  }
+.field {
+    label {
+        font-family: 'CampaignMedium' !important;
+        font-size: 1.25em;
+        font-weight: 500 !important;
+       // font-weight: 400;
+    }
+}
+::ng-deep .ui.multiple.dropdown .text {
+    font-size: 14px !important;
+    font-family: 'MontserratRegular_2';
+    font-weight: 400 !important;
+  }
 .button {
-    background-color: #a8abe3 !important;
+    background-color: #865BA0 !important;
     border: none;
     width: fit-content;
     border-radius: 5px;
     // height: 40px;
-    font-family: "Muli",sans-serif;
-    font-size: 15px;
+    font-family: 'MontserratRegular_2';
+    font-size: 13px !important;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 400;
     box-shadow: none;
     cursor: pointer;
     color: white !important ;
@@ -43,10 +60,10 @@
         width: 25% !important;
     }
 }
-.searchfilterbutton
-{
-    font-size: 0.94rem !important;
-}
+// .searchfilterbutton
+// {
+//     font-size: 0.94rem !important;
+// }
 .filter-button
 {
     padding-top: 6px;

@@ -25,7 +25,7 @@ i.fas.fa-database.fa-lg {
 }
 .card-header {
   cursor: pointer;
-  background: #585858
+  background: #865BA0
 }
 .creator {
   display: block;
@@ -33,7 +33,7 @@ i.fas.fa-database.fa-lg {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 14px;
-  color: #686F7A;
+  color: black;
   padding-bottom: 6px;
 }
  #style {
@@ -53,10 +53,13 @@ i.fas.fa-database.fa-lg {
   padding: 2px 2px;
   margin-top: -32px;
  }
+ span {
+  font-family: 'MontserratRegular_2' !important;
+  font-weight: 400 !important;
+ }
  #pub {
-  background-color: #a8abe3 !important;
+  background-color: #865BA0 !important;
    border-radius: 4rem;
-   font-family: "Muli",sans-serif;
    color: white ;
  }
  .card {
@@ -166,18 +169,28 @@ i.fas.fa-database.fa-lg {
   -webkit-line-clamp: 2;
   font-weight: 600;
   font-size: 15px;
-  color: #686F7A;
+  color: black;
   margin-bottom: 8px;
   line-clamp: 2;
   line-height: 2rem;
   height: 3.6rem
   
 }
+button {
+  font-family: 'MontserratRegular_2' !important;
+  font-weight: 400 !important;
+}
 .card-body {
   height: 17rem;
+   font-family: 'MontserratRegular_2';
+   font-weight: 400 !important;
+ // font-family: 'MontserratRegular_2' !important;
+  p {
+    font-size: 15px;
+  }
 }
 .btn-sec {
-  background-color: #a8abe3 !important;
+  background-color: #865BA0 !important;
   border: none;
   border-radius: 5px;
   height: 40px;
@@ -187,6 +200,9 @@ i.fas.fa-database.fa-lg {
   font-weight: 700;
   box-shadow: none;
   cursor: pointer;
+}
+.btn-purple {
+  background-color: #865BA0 !important;
 }
 .modal {
   height: unset !important;
@@ -199,7 +215,7 @@ i.fas.fa-database.fa-lg {
 }
 .desc1 {
   font-size: 14px;
-  color: #686F7A;
+  color: black;
 }
 @media only screen and (min-width: 1200px) {
 .ui.mini.modal {
@@ -220,7 +236,7 @@ a:hover {
   text-decoration: none;
 }
 .contentlink{
-  color:#007bff;
+  color:black;
 }
 .contentlink:hover{
   text-decoration: underline;
