@@ -72,9 +72,9 @@
 <body>
 
 	<!-- Header -->
-	<header style="display: flex;" class="bg-white p-10" id="nav-bar">
+	<header class="bg-white p-10" id="nav-bar">
 		<div class="ui logo d-flex flex-ai-center row">
-			<div class="col-2">
+			<div class="col2">
 				<span class="navbar-brand ">
 					<a class="flex-ai-center ml-10"><img class="image centered cursor-pointer ml-10"
 							src="images/spacelogonew.png" alt="sunbird.ins"></a>
@@ -97,26 +97,19 @@
 					</div> -->
 
 		</div>
-		</div>
 		<div style="display: flex;margin-right: 0;" class="container">
-			<div class="col-lg-6">
-				<nav class="navbar-collapse collapse" id="menu" aria-expanded="false"
-					style="height: 1px;margin-top: 22px;margin-left: 30px;">
-					<div class="computer only">
+				<nav class="navbar-collapse collapse menu-bar" id="menu" aria-expanded="false">
+					<div class="computer only menu-container">
 						<a class="menuItem links" onclick="gotoContact('about')">About</a>
 						<a class="menuItem links" onclick="gotoResources('explore')">Assets</a>
 						<a class="menuItem links" onclick="gotoContact('collaborators')">Collaborators</a>
 						<!-- <a class="menuItem" id="a" onclick="gotoContact('contactUs')">Contact</a> -->
 						<!-- <a class="menuItem" id="a" href="/contactUs">Contact</a> -->
-						
+						<a class="col-lg-push-12 sunblogin menuItem font-weight-bold ml-auto btn btn-purple"
+									href="/resources" id="ab">
+									Sign In </a>
 					</div>
 				</nav>
-			</div>
-			<div style="width: 46%;">
-				<a class="col-lg-push-12 sunblogin menuItem font-weight-bold ml-auto btn btn-purple"
-							href="/resources" id="ab">
-							Sign In </a>
-			</div>
 		</div>
 	</header>
 	<!-- /Header -->
@@ -132,9 +125,7 @@
 						<div class="slide-details text-center text-white">
 							<div class="container-1">
 								<!-- <p class="fax"> Welcome to Societal Platform Assets Collaboration Environment</p> -->
-								<p class="text"> A place to search, discover and share assets including concepts,
-									methods, processes, software, hardware and data.
-								</p>
+								<p class="text"> A place to search, discover and share assets including concepts, methods, processes, software, hardware and data.</p>
 								<br> <button class="ui explore btn btn-purple button flex-as-center mr-20" tabindex="0"
 									onclick="gotoResources('explore')">
 									Explore
@@ -217,7 +208,7 @@
 							</div>
 						</div> -->
 					<div class="col">
-						<div class="row">
+						<div class="row justify-center">
 							<div _ngcontent-c3="" class="ft-1 font" role="banner">
 								<!-- <p class="p"> EkStep Foundation </p>
                      <p class="p"><a href="space@societalplatform.org" style="font-family: 'Muli', sans-serif;" target="_blank" class=""></a>   email: space@societalplatform.org</p> -->
@@ -240,11 +231,11 @@
 						</div>
 					</div> -->
 					<div class="col-lg-3 col-md-4 col-sm-12 text-pp mt-15">
-						<div class="row r">
+						<div class="row r justify-center">
 							<h5 class="footer__title" style="font-family: 'CampaignMedium';
 							color: Black!important;">Contact Us</h5>
 						</div>
-						<div class="row">
+						<div class="row justify-center">
 							<div>
 								<p class="footer__right__content" style="font-family: 'MontserratRegular_2';">Ekstep
 									Foundation <br>

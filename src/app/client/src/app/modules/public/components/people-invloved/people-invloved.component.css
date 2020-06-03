@@ -187,6 +187,9 @@ li {
   .text{
       width: auto;
   }
+  .cimage {
+    background-position: right;
+  }
 }
 .socion {
   font-family: 'socion-icons' !important;

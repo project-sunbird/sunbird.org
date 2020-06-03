@@ -50,10 +50,22 @@
     .prominent-filter {
         width: 100vw;
     }
+    #search {
+        margin-top: -33px !important;
+    }
+    #res-searchbtn {
+        margin-top: -40px !important;
+    }
 }
 @media screen and (max-width:765px) and (min-width:425px) {
     .prominent-filter {
         width: 100vw;
+    }
+    #search {
+        margin-top: -33px !important;
+    }
+    #res-searchbtn {
+        margin-top: -40px !important;
     }
 }
 // @media screen and (max-width:980px) and (min-width:766px) {
@@ -76,4 +88,7 @@
 .mt-lg-5  {
     margin-top: 3rem !important;
 } 
+}
+.center-text {
+    text-align: center !important;
 }

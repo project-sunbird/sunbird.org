@@ -20,7 +20,7 @@
                 <div class="twelve wide tablet nine wide computer column mobile-p-0">
                   <div class="ui grid" *ngIf="formFieldProperties">
                     <ng-container *ngIf="formFieldProperties.length <= 4">
-                      <div class="six wide mobile three wide tablet four wide computer column" *ngFor="let field of formFieldProperties">
+                      <div class="twelve wide mobile three wide tablet four wide computer column" *ngFor="let field of formFieldProperties">
                         <div class="field">
                           <label class="mb-10">{{field.label}}</label>
                           <ng-container *ngIf="field.inputType==='select' || field.inputType==='multi-select'">
@@ -56,7 +56,7 @@
                   </div>
                 </div>
                 
-                <div class="twelve wide tablet two wide computer right aligned top aligned column filter-button" id="res-searchbtn">
+                <div class="twelve wide tablet two wide computer right aligned top aligned column filter-button center-text rm-mrg-tp" id="res-searchbtn">
                   <label class="computer-only " style="font-size: 2.8571rem;">&nbsp;</label>
                   <a class="searchfilterbutton ui tiny button" (click)="applyFilters()" appTelemetryInteract [telemetryInteractEdata]="submitIntractEdata">
                     {{resourceService.frmelmnts?.btn?.apply}}

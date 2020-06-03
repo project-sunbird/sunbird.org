@@ -1,3 +1,6 @@
+.menu-bar {
+	margin-left: 30px !important;
+}
 @media screen and (max-width:600px){
 .col-xxs-3{width:25% !important; padding-left:15px; padding-right:15px; position:relative; float:left;}
 .col-xxs-4{width:33.33% !important; padding-left:15px; padding-right:15px; position:relative;float:left;}
@@ -10,6 +13,33 @@
 .site-2{width:30%;}
 .site-3{width:70%;}
 .site-4{width:30%;}
+.justify-center {
+	justify-content: center;
+}
+.slide-details{
+	font-size: 12px !important;
+	transform: translate(-50%,32%) !important;
+}
+.text {
+	display: none !important;
+}
+.col2 {
+	width: 70%;
+}
+.menu-bar {
+	margin-left: 0px !important;
+	width: 100%;
+}
+.menuItem {
+	display: block;
+    text-align: center;
+}
+.menu-container {
+	width: 100% !important;
+}
+.sunblogin {
+	margin: auto !important;
+}
 }
 @media screen and (max-width:480px){
 .col-xxxs-1{width:8.33% !important; padding-left:15px; padding-right:15px; position:relative;float:left;}
@@ -27,7 +57,19 @@ footer{text-align:center;}
 .site-2{width:30%;}
 .site-3{width:100%;}
 .site-4{width:100%;}
-
+.justify-center {
+	justify-content: center;
+}
+.slide-details{
+	font-size: 12px !important;
+	transform: translate(-50%,32%) !important;
+}
+.text {
+	display: none !important;
+}
+.col2 {
+	width: 70%;
+}
 }
 
 body{

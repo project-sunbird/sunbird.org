@@ -95,4 +95,7 @@ p {
     .text{
         width: auto;
     }
+    .cimage {
+      background-position: right;
+    }
   }
