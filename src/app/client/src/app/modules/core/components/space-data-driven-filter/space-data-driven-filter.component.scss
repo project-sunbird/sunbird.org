@@ -48,6 +48,18 @@
     cursor: pointer;
     color: white !important ;
 }
+@media screen and (max-width:600px){
+    .mobile-res {
+        width: 100%;
+        margin-top: -35px;
+    }
+}
+@media screen and (max-width:480px){
+    .mobile-res {
+        width: 100%;
+        margin-top: -35px;
+    }
+}
 @media screen and (min-width: 320px) and (max-width: 1023px) {
 
     .ui.column.grid>[class*="three wide"].column, .ui.grid>.column.row>[class*="three wide"].column, .ui.grid>.row>[class*="three wide"].column, .ui.grid>[class*="three wide"].column {

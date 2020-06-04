@@ -81,3 +81,19 @@
             margin-right: 1rem;
         } 
     }
+    @media screen and (max-width:600px){
+        .mobile-sr-res {
+            width: 100%;
+        }
+        .pad-6 {
+            padding: 0% 6%;
+        }
+    }
+    @media screen and (max-width:480px){
+        .mobile-sr-res {
+            width: 100%;
+        }
+        .pad-6 {
+            padding: 0% 6%;
+        }
+    }
