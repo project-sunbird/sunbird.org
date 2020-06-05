@@ -4,6 +4,9 @@
 .fl-wrap {
 	flex-wrap: wrap;;
 }
+.menu-items {
+	padding-left: 85px;
+}
 @media screen and (max-width:600px){
 .col-xxs-3{width:25% !important; padding-left:15px; padding-right:15px; position:relative; float:left;}
 .col-xxs-4{width:33.33% !important; padding-left:15px; padding-right:15px; position:relative;float:left;}
