@@ -660,15 +660,18 @@ address{margin:0;}
 		max-height:50px;
 	}
 }
-/*Above 1200px*/
-@media screen and (min-width:1200px){
-	.playlist-cover {
-		height:360px;
-	}
+/*Above 972*/
+@media screen and (min-width:972px){
 	.sin-but {
 		position: absolute !important;
     	right: 25px;
     	top: 15px;
+	}
+}
+/*Above 1200px*/
+@media screen and (min-width:1200px){
+	.playlist-cover {
+		height:360px;
 	}
 }
 /*Above 1280px*/
@@ -1230,6 +1233,8 @@ a:hover, a:active {
     .footer1 {
         margin-top: 2rem !important;
 	}
+}
+@media screen and (min-width:1335px) {
 	.text {
 		width: 74rem;
 	}
