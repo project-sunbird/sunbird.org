@@ -665,6 +665,11 @@ address{margin:0;}
 	.playlist-cover {
 		height:360px;
 	}
+	.sin-but {
+		position: absolute !important;
+    	right: 25px;
+    	top: 15px;
+	}
 }
 /*Above 1280px*/
 @media screen and (min-width: 1280px){
@@ -727,7 +732,7 @@ address{margin:0;}
 		font-family: 'Muli', sans-serif , Bold;
   }
   .text {
-    width: 74rem;
+    width: 51rem;
     margin: auto;
     display: block;
 	font-size: 17px;
@@ -1224,7 +1229,10 @@ a:hover, a:active {
 @media screen and (min-width:1024px) and (max-width: 1699px) {
     .footer1 {
         margin-top: 2rem !important;
-    }
+	}
+	.text {
+		width: 74rem;
+	}
 }
  @media screen and (min-width: 1700px) and (max-width:1800px) {
     .container{
