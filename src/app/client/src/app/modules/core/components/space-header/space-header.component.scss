@@ -2,6 +2,19 @@
 // @import"../../../../../../node_modules/jquery/dist/jquery.min.js";
 @import "variables";
 
+@media screen and (max-width:600px){
+  .ui.sidebar.right.visible.uncover {
+    background-color: white !important;
+    height: 100vh !important;
+  }
+}
+@media screen and (max-width:480px){
+  .ui.sidebar.right.visible.uncover {
+    background-color: white !important;
+    height: 100vh !important;
+  }
+}
+
 .sidebar-hamburger-menu {
   color:$primary-color;
 }
